@@ -55,7 +55,7 @@ public class PaintShooter : MonoBehaviour
 //			Debug.Log(cam.transform.position);
 			Debug.DrawLine(transform.position, hit.point, Color.red, 10);
 			
-			decal = Instantiate(splatter, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
+			decal = Instantiate(splatter, hit.point + (hit.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
 			
 			hit.rigidbody.renderer.material.color = new Color(Random.value, Random.value, Random.value);
 			
