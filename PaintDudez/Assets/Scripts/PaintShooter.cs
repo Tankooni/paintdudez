@@ -41,6 +41,11 @@ public class PaintShooter : MonoBehaviour
 		
 	}
 	
+	void OnCollsionEnter(Collision col)
+	{
+		Debug.Log("sss");
+	}
+	
 	void ShootPaint()
 	{
 		Vector3 dir = cam.transform.forward;
@@ -48,7 +53,7 @@ public class PaintShooter : MonoBehaviour
 		RaycastHit hit;
 		
 		
-		if(Physics.Raycast(transform.position, dir, out hit, 10))
+		if(Physics.Raycast(transform.position, dir, out hit, 1000))
 		{
 			GameObject decal;
 //			Debug.Log("Hit: " + hit.rigidbody.name);
@@ -56,8 +61,9 @@ public class PaintShooter : MonoBehaviour
 			Debug.DrawLine(transform.position, hit.point, Color.red, 10);
 			
 			decal = Instantiate(splatter, hit.point + (hit.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
-			
-			hit.rigidbody.renderer.material.color = new Color(Random.value, Random.value, Random.value);
+			decal.transform.localScale = new Vector3(Random.Range(0.7f, 2.0f), Random.Range(0.7f, 2.0f), 1);
+			decal.transform.parent = hit.rigidbody.gameObject.transform;
+			decal.renderer.material.color = Color.blue;
 			
 			hit.rigidbody.collider.material = physicsMats[1];
 			hit.rigidbody.AddForce(new Vector3(0,500,0));
