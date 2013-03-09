@@ -1,0 +1,13 @@
+Paint Splattering
+	Possibly done with two separate collision spheres.
+	one to detect collision (smaller), one for placing splatters (larger)
+cropping decals on surfaces
+Copy the part of the mesh needed to apply the decal to, and then apply decal to that
+
+
+Finish this list
+	
+	
+	
+	
+FLUID JANK

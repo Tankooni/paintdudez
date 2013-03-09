@@ -10,12 +10,6 @@ public class PaintBlobScript : MonoBehaviour
 	
 	}
 	
-	void OnCollisionEnter(Collision col)
-	{
-		collider.transform.localScale *= 20f;
-		
-	}
-	
 	void OnCollisionStay(Collision col)
 	{
 		foreach (ContactPoint contact in col.contacts)
@@ -23,7 +17,7 @@ public class PaintBlobScript : MonoBehaviour
             Debug.DrawRay(contact.point, contact.normal, Color.white, 1000000);
 			GameObject decal = Instantiate(PaintShooter.splatter, contact.point + (contact.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, contact.normal)) as GameObject;
 			decal.transform.localScale = new Vector3(Random.Range(0.7f, 2.0f), Random.Range(0.7f, 2.0f), 1);
-			decal.transform.parent = contact.otherCollider.rigidbody.transform;
+			decal.transform.parent = contact.otherCollider.transform;
 			decal.renderer.material.color = Color.blue;
         }
 
