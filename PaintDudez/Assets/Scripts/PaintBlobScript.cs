@@ -10,7 +10,7 @@ public class PaintBlobScript : MonoBehaviour
 	
 	}
 	
-	void OnCollisionStay(Collision col)
+	void OnCollisionEnter(Collision col)
 	{
 		foreach (ContactPoint contact in col.contacts)
 		{
@@ -19,6 +19,7 @@ public class PaintBlobScript : MonoBehaviour
 			decal.transform.localScale = new Vector3(Random.Range(0.7f, 2.0f), Random.Range(0.7f, 2.0f), 1);
 			decal.transform.parent = contact.otherCollider.transform;
 			decal.renderer.material.color = Color.blue;
+			decal.SendMessage("SetNormal", contact.normal);
         }
 
 		Destroy(gameObject);

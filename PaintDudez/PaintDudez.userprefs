@@ -1,14 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PaintSplotchScript.cs">
-    <Files>
-      <File FileName="Assets\Scripts\PaintShooter.cs" Line="49" Column="3" />
-      <File FileName="Assets\Scripts\PaintBlobScript.cs" Line="25" Column="3" />
-      <File FileName="Assets\Scripts\PaintSplotchScript.cs" Line="24" Column="70" />
-      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" Line="20" Column="33" />
-      <File FileName="Assets\Scripts\SaveMesh.cs" Line="7" Column="24" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
