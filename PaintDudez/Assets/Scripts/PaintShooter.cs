@@ -7,8 +7,11 @@ public class PaintShooter : MonoBehaviour
 	public PhysicMaterial [] physicsMats;
 	public int currentMat = 0;
 	Camera cam;
-	public static GameObject splatter;
-	GameObject blob;
+	public static GameObject splatter = null;
+	GameObject blob = null;
+	GameObject ball = null;
+	
+	Transform pickedObj = null;
 	
 	// Use this for initialization
 	void Start()
@@ -17,6 +20,7 @@ public class PaintShooter : MonoBehaviour
 		cam = GetComponentInChildren<Camera>() as Camera;
 		PaintShooter.splatter = Resources.Load("Prefabs/splatterDecal") as GameObject;
 		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
+		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
 	}
 	
 	
@@ -39,6 +43,21 @@ public class PaintShooter : MonoBehaviour
 			Debug.Log("1");
 		}
 		
+		if(Input.GetKeyDown(KeyCode.E))
+		{
+			Debug.Log("E");
+			PickObject();
+			
+		}
+	}
+	
+	void PickObject()
+	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		if(!pickedObj)
+		{
+			
+		}
 	}
 	
 	void ShootPaint()
