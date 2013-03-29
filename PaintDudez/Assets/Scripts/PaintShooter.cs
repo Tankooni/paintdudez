@@ -11,7 +11,12 @@ public class PaintShooter : MonoBehaviour
 	GameObject blob = null;
 	GameObject ball = null;
 	
-	Transform pickedObj = null;
+	#region Picker vars
+	Transform pickObj = null;
+	float pickDist;
+	RaycastHit pickHit;
+	#endregion
+	
 	
 	// Use this for initialization
 	void Start()
@@ -21,6 +26,7 @@ public class PaintShooter : MonoBehaviour
 		PaintShooter.splatter = Resources.Load("Prefabs/splatterDecal") as GameObject;
 		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
 		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
+		
 	}
 	
 	
@@ -43,21 +49,48 @@ public class PaintShooter : MonoBehaviour
 			Debug.Log("1");
 		}
 		
-		if(Input.GetKeyDown(KeyCode.E))
+		if(Input.GetKey(KeyCode.E))
 		{
-			Debug.Log("E");
 			PickObject();
+		}
+		if(Input.GetKeyUp(KeyCode.E))
+			DropObject();
+		
+		if(Input.GetKeyDown(KeyCode.Q))
+		{
 			
 		}
 	}
 	
 	void PickObject()
 	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if(!pickedObj)
+		Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+		
+		if(!pickObj)
 		{
-			
+			if(Physics.Raycast(pickRay, out pickHit) && pickHit.transform.tag == "Pick")
+			{
+				Debug.DrawLine(pickRay.origin, pickHit.point, Color.magenta);
+				if (pickHit.rigidbody)
+				{
+					pickHit.rigidbody.velocity = Vector3.zero;
+				}
+				pickObj = pickHit.transform;
+				pickDist = Vector3.Distance(pickObj.position, Camera.main.transform.position);
+			}
 		}
+		else
+		{
+			pickObj.position = pickRay.GetPoint(pickDist);
+			pickHit.rigidbody.velocity = Vector3.zero;
+		}
+		
+		Debug.Log(pickHit.rigidbody.velocity);
+	}
+	
+	void DropObject()
+	{
+		pickObj = null;
 	}
 	
 	void ShootPaint()
