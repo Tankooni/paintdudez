@@ -56,9 +56,16 @@ public class PaintShooter : MonoBehaviour
 		if(Input.GetKeyUp(KeyCode.E))
 			DropObject();
 		
-		if(Input.GetKeyDown(KeyCode.Q))
+		if(Input.GetKey(KeyCode.Q))
 		{
-			
+			Instantiate(ball, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity);
+		}
+		if( Input.GetAxis("Mouse ScrollWheel") != 0)
+		{
+			if(pickObj != null)
+			{
+				pickDist += Input.GetAxis("Mouse ScrollWheel") * 3;
+			}
 		}
 	}
 	
@@ -74,6 +81,7 @@ public class PaintShooter : MonoBehaviour
 				if (pickHit.rigidbody)
 				{
 					pickHit.rigidbody.velocity = Vector3.zero;
+					pickHit.rigidbody.angularVelocity = Vector3.zero;
 				}
 				pickObj = pickHit.transform;
 				pickDist = Vector3.Distance(pickObj.position, Camera.main.transform.position);
@@ -82,10 +90,11 @@ public class PaintShooter : MonoBehaviour
 		else
 		{
 			pickObj.position = pickRay.GetPoint(pickDist);
-			pickHit.rigidbody.velocity = Vector3.zero;
+			if (pickHit.rigidbody)
+			{
+				pickHit.rigidbody.velocity = Vector3.zero;
+			}
 		}
-		
-		Debug.Log(pickHit.rigidbody.velocity);
 	}
 	
 	void DropObject()
@@ -100,7 +109,6 @@ public class PaintShooter : MonoBehaviour
 		GameObject paint = Instantiate(blob, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity) as GameObject;
 		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
 
-		Debug.Log(cam.transform.forward);
 //		RaycastHit hit;
 //		
 //		
