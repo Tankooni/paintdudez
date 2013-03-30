@@ -13,9 +13,12 @@ public class PaintSplotchScript : MonoBehaviour
 	
 	void OnTriggerEnter(Collider col)
 	{
-		Debug.Log("Stuff");
-		col.rigidbody.AddForce(normal*500);
-		Debug.DrawRay(transform.position, normal, Color.cyan, 1000);
+		if(col.rigidbody)
+		{
+			col.rigidbody.AddForce(normal*500);
+			Debug.DrawRay(transform.position, normal, Color.cyan, 1000);
+		}
+		
 	}
 			
 	void OnCollisionEnter(Collision col)
