@@ -107,6 +107,7 @@ public class PaintShooter : MonoBehaviour
 		Vector3 dir = cam.transform.forward;
 		
 		GameObject paint = Instantiate(blob, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity) as GameObject;
+		Physics.IgnoreCollision(paint.collider, collider);
 		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
 
 //		RaycastHit hit;
