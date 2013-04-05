@@ -3,11 +3,8 @@ Paint Splattering
 	one to detect collision (smaller), one for placing splatters (larger)
 cropping decals on surfaces
 Copy the part of the mesh needed to apply the decal to, and then apply decal to that
-
+Add another paint (zoom zoom, or sticky next)
+Create a system for paints
+Add an actual paint gun that displays info about paint
 
 Finish this list
-	
-	
-	
-	
-FLUID JANK
