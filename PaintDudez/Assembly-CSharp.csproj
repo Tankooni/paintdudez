@@ -44,7 +44,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Paint\BlueSplotch.cs" />
+     <Compile Include="Assets\Scripts\Paint\GreenSplotch.cs" />
      <Compile Include="Assets\Scripts\Paint\PaintSplotch.cs" />
+     <Compile Include="Assets\Scripts\Paint\RedSplotch.cs" />
      <Compile Include="Assets\Scripts\PaintBlobScript.cs" />
      <Compile Include="Assets\Scripts\PaintShooter.cs" />
      <Compile Include="Assets\Scripts\PaintSplotchScript.cs" />

@@ -11,25 +11,14 @@ public class PaintSplotchScript : MonoBehaviour
 	void Start()
 	{
 		mf = GetComponent<MeshFilter>();
-		renderer.material.color = Color.blue;
+		paint = new BlueSplotch(gameObject);
+		paint.normal = normal;
 	}
 	
 	void OnTriggerEnter(Collider col)
 	{
-		if(col.gameObject.name == "Player")
-		{
-			col.gameObject.SendMessage("SetVelocity", normal*30);
-		}
-		else if(col.rigidbody)
-		{
-			col.rigidbody.AddForce(normal*500);
-			//Debug.DrawRay(transform.position, normal, Color.cyan, 1000);
-		}
-	}
-			
-	void OnCollisionEnter(Collision col)
-	{
-		col.rigidbody.AddForce(normal*1000);
+		if(paint != null)
+			paint.EnactPaint(col);
 	}
 	
 	// Update is called once per frame

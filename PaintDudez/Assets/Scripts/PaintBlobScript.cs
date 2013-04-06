@@ -20,10 +20,7 @@ public class PaintBlobScript : MonoBehaviour
 			if (Physics.Raycast(ray, out hit, 1000))
 			{
 				Debug.DrawRay(hit.point, hit.normal, Color.red, 1000);
-				Debug.Log("Stuff");
-				
-				
-				
+
 				GameObject decal = Instantiate(PaintShooter.splatter, hit.point + (contact.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, contact.normal)) as GameObject;
 				decal.transform.localScale = new Vector3(Random.Range(0.7f, 2.0f), decal.transform.localScale.y, Random.Range(0.7f, 2.0f));
 				decal.transform.parent = contact.otherCollider.transform;
