@@ -38,7 +38,6 @@ public class Character : MonoBehaviour
 	public void OnControllerColliderHit (ControllerColliderHit hit)
 	{
 		Debug.Log(hit.normal.ToString());
-		
 		groundNormal = hit.normal;
 	}
 	public String getBehv()
