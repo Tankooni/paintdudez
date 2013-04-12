@@ -11,12 +11,14 @@ public class GreenSplotch : PaintSplotch
 	
 	public override void EnactPaint (Collider theCollider)
 	{
+		base.EnactPaint(theCollider);
 		if(theCollider.rigidbody && theCollider.name != "Player")
 		{
+			Debug.Log(theCollider);
+			theCollider.rigidbody.isKinematic =true;
 //			theCollider.rigidbody.velocity = Vector3.zero;
 //			theCollider.rigidbody.angularVelocity = Vector3.zero;
-			theCollider.rigidbody.isKinematic =true;
-			//theCollider.transform.parent = myObject.transform;
+//			theCollider.transform.parent = myObject.transform;
 		}
 		
 	}

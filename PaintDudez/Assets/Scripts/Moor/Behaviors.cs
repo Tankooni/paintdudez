@@ -124,8 +124,6 @@ namespace MainGameComponents
 			}
 			else
 			{
-				Debug.Log("Jank");
-				
 				Screen.lockCursor = true;
 				
 				Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));

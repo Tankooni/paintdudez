@@ -14,6 +14,12 @@ public class PaintSplotch
 	
 	public virtual void EnactPaint(Collider theCollider)
 	{
+		if(myObject == theCollider.gameObject)
+			return;
+	}
+	
+	public virtual void DeEnactPaint(Collider theCollider)
+	{
 		
 	}
 	

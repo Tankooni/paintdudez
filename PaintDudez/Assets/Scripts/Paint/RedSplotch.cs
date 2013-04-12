@@ -6,7 +6,7 @@ public class RedSplotch : PaintSplotch
 	public RedSplotch(GameObject go)
 		: base(go)
 	{
-		color = Color.red;
+		go.renderer.material.color = Color.red;
 	}
 	
 	public override void EnactPaint (Collider theCollider)
