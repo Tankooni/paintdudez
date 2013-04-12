@@ -11,7 +11,7 @@ public class PaintSplotchScript : MonoBehaviour
 	void Start()
 	{
 		mf = GetComponent<MeshFilter>();
-		paint = new BlueSplotch(gameObject);
+		paint = new GreenSplotch(gameObject);
 		paint.normal = normal;
 	}
 	
@@ -24,6 +24,7 @@ public class PaintSplotchScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		paint.Update();
 //		foreach(Vector3 poin in mf.mesh.vertices)
 //		{
 //			
