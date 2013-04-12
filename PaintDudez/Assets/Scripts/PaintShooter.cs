@@ -22,7 +22,8 @@ public class PaintShooter : MonoBehaviour
 	void Start()
 	{
 		//physicsMats = Resources.LoadAll("PhysMats") as PhysicMaterial;
-		cam = GetComponentInChildren<Camera>() as Camera;
+		//cam = GetComponentInChildren<Camera>() as Camera;
+		cam = Camera.main;
 		PaintShooter.splatter = Resources.Load("Prefabs/splatterDecal") as GameObject;
 		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
 		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
