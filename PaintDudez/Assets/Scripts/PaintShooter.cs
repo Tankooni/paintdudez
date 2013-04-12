@@ -78,7 +78,7 @@ public class PaintShooter : MonoBehaviour
 			if(Physics.Raycast(pickRay, out pickHit) && pickHit.transform.tag == "Pick")
 			{
 				Debug.DrawLine(pickRay.origin, pickHit.point, Color.magenta);
-				if (pickHit.rigidbody)
+				if (pickHit.rigidbody && !pickHit.rigidbody.isKinematic)
 				{
 					pickHit.rigidbody.velocity = Vector3.zero;
 					pickHit.rigidbody.angularVelocity = Vector3.zero;
@@ -90,7 +90,7 @@ public class PaintShooter : MonoBehaviour
 		else
 		{
 			pickObj.position = pickRay.GetPoint(pickDist);
-			if (pickHit.rigidbody)
+			if (pickHit.rigidbody && !pickHit.rigidbody.isKinematic)
 			{
 				pickHit.rigidbody.velocity = Vector3.zero;
 			}
