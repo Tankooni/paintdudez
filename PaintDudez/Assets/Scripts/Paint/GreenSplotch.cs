@@ -13,9 +13,9 @@ public class GreenSplotch : PaintSplotch
 	{
 		if(theCollider.rigidbody && theCollider.name != "Player")
 		{
-			theCollider.rigidbody.velocity = Vector3.zero;
-			theCollider.rigidbody.angularVelocity = Vector3.zero;
-			theCollider.rigidbody.useGravity = false;
+//			theCollider.rigidbody.velocity = Vector3.zero;
+//			theCollider.rigidbody.angularVelocity = Vector3.zero;
+			theCollider.rigidbody.isKinematic =true;
 			//theCollider.transform.parent = myObject.transform;
 		}
 		
