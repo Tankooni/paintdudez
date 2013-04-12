@@ -11,6 +11,7 @@ public class RedSplotch : PaintSplotch
 	
 	public override void EnactPaint (Collider theCollider)
 	{
+		
 	}
 	
 

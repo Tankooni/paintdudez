@@ -5,7 +5,7 @@ public class PaintSplotch
 {
 	public Color color = Color.white;
 	public Vector3 normal;
-	GameObject myObject;
+	protected GameObject myObject;
 	
 	public PaintSplotch(GameObject go)
 	{
