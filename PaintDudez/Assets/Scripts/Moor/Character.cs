@@ -28,6 +28,8 @@ public class Character : MonoBehaviour
         myStates.Add("walk", typeof(Walk));
 		myStates.Add("run", typeof(Run));
 		myStates.Add("hax", typeof(Hax));
+		myStates.Add("RedPaint", typeof(RedPaint));
+		myStates.Add("BluePaint", typeof(BluePaint));
 		
 		SetBehavior("");
         //myStates.Add("run", typeof(Run));

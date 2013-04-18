@@ -11,9 +11,10 @@ public class BlueSplotch : PaintSplotch
 	
 	public override void EnactPaint (Collider theCollider)
 	{
-		if(theCollider.gameObject.name == "Player")
+		if(theCollider.gameObject.name == "CubePlayer")
 		{
-			theCollider.gameObject.SendMessage("SetVelocity", normal*30);
+			//theCollider.gameObject.SendMessage("SetVelocity", normal*30);
+			theCollider.gameObject.SendMessage("SetBehavior", "BluePaint", SendMessageOptions.DontRequireReceiver);
 			Debug.Log(normal);
 		}
 		else if(theCollider.rigidbody)

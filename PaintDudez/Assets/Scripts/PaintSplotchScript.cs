@@ -11,7 +11,7 @@ public class PaintSplotchScript : MonoBehaviour
 	void Start()
 	{
 		mf = GetComponent<MeshFilter>();
-		paint = new GreenSplotch(gameObject);
+		paint = new BlueSplotch(gameObject);
 		paint.normal = normal;
 	}
 	
@@ -19,6 +19,11 @@ public class PaintSplotchScript : MonoBehaviour
 	{
 		if(paint != null)
 			paint.EnactPaint(col);
+	}
+	
+	void OnTriggerExit(Collider col)
+	{
+		paint.DeEnactPaint(col);
 	}
 	
 	// Update is called once per frame

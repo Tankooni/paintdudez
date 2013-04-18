@@ -175,4 +175,22 @@ namespace MainGameComponents
 			
 		}
 	}
+	
+	public class RedPaint : Walk
+	{
+		public RedPaint() : base()
+		{
+			Debug.Log("Zooming");
+			dataValues.hForce = 7.0f;
+			dataValues.maxHSpeed = 10.0f;
+		}
+	}
+	public class BluePaint : Walk
+	{
+		public BluePaint() : base()
+		{
+			Debug.Log("Bounced");
+			dataValues.Vel.y += 100;
+		}
+	}
 }
