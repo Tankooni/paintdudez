@@ -11,7 +11,7 @@ public class RedSplotch : PaintSplotch
 	
 	public override void EnactPaint (Collider theCollider)
 	{
-		
+		theCollider.gameObject.SendMessage("SetBehavior", "RedPaint",SendMessageOptions.DontRequireReceiver);
 	}
 	
 
