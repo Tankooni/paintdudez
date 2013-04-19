@@ -24,6 +24,11 @@ public class BlueSplotch : PaintSplotch
 		}
 	}
 	
+	public override void DeEnactPaint (Collider theCollider)
+	{
+		
+	}
+	
 	// Update is called once per frame
 	public override void Update()
 	{

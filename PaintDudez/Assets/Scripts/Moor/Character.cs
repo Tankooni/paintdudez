@@ -39,7 +39,7 @@ public class Character : MonoBehaviour
     }
 	public void OnControllerColliderHit (ControllerColliderHit hit)
 	{
-		Debug.Log(hit.normal.ToString());
+		//Debug.Log(hit.normal.ToString());
 		groundNormal = hit.normal;
 	}
 	public String getBehv()
@@ -51,13 +51,14 @@ public class Character : MonoBehaviour
         if (!myStates.Keys.Contains(myBehv))
         {
             myBehv = DefaultBehavior;
+			Debug.Log(myBehv);
         }
 		myBehvariorS = myBehv;
         myBehavior = (CharacterBehavior)Activator.CreateInstance(myStates[myBehv]);
     }
     public void Update()
     {
-        myBehavior.HandleUpdate();
+		myBehavior.HandleUpdate();
 		myFlags = myController.Move(myBehavior.GetVel() * Time.smoothDeltaTime);
 		myBehavior.dataValues.inAir = (myFlags & CollisionFlags.CollidedBelow) == 0;
     }

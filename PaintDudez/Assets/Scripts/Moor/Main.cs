@@ -37,7 +37,7 @@ namespace MainGameComponents
 			FirstPlayer = true;
             canMove = true;
 			hForce = 1.0f;
-			jForce = 16.666f ;
+			jForce = 16.666f;
             maxHSpeed = 100.0f ;
             maxVSpeed = -990.0f ;
             gForce = new Vector3(0.0f, 0.6333f, 0.0f);
