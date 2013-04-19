@@ -22,6 +22,9 @@ public class Character : MonoBehaviour
 	public CollisionFlags myFlags;
 	[NonSerialized]
 	public Vector3 groundNormal;
+	[NonSerialized]
+	public myMoveVars dataValues;
+	
     public void Awake()
     {
 		groundNormal = Vector3.zero;
