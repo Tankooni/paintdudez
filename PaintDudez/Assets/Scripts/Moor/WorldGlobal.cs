@@ -5,7 +5,7 @@ using MainGameComponents;
 
 public class WorldGlobal : MonoBehaviour {
 
-	Character myChar;
+	//Character myChar;
 	
 	void Awake () {
 		Init ();
@@ -14,12 +14,12 @@ public class WorldGlobal : MonoBehaviour {
 	}
 	
 	void Update () {
-		myChar.Update ();
+		//myChar.Update ();
 	}
 	void OnLevelWasLoaded() {
 		Init ();
 	}
 	void Init() {
-		myChar = new Character();
+		//myChar = new Character();
 	}
 }

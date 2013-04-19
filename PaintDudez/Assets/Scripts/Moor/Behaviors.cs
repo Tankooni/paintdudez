@@ -124,7 +124,7 @@ namespace MainGameComponents
 			}
 			else
 			{
-				Screen.lockCursor = true;
+				//Screen.lockCursor = true;
 				
 				Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 				
@@ -190,7 +190,11 @@ namespace MainGameComponents
 		public BluePaint() : base()
 		{
 			Debug.Log("Bounced");
-			dataValues.Vel.y += 100;
+			if(!dataValues.inAir)
+			{
+				dataValues.Vel.y += 16.666f;
+				dataValues.inAir = true;
+			}
 		}
 	}
 }
