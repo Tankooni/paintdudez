@@ -64,10 +64,11 @@ namespace MainGameComponents
 		public myMoveVars dataValues;
 		protected string CurBehv;
 
-        public CharacterBehavior()
+        public CharacterBehavior(myMoveVars mv)
 		{
+			dataValues = mv;
 			CurBehv = "none";
-			dataValues = new myMoveVars();
+			//dataValues = new myMoveVars();
             myChar = (Character)GameObject.Find("CubePlayer").GetComponent(typeof(Character));
 			SetBehv();
 		}

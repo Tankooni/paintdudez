@@ -23,10 +23,11 @@ public class Character : MonoBehaviour
 	[NonSerialized]
 	public Vector3 groundNormal;
 	[NonSerialized]
-	public myMoveVars dataValues;
+	public myMoveVars characterValues;
 	
     public void Awake()
     {
+		characterValues = new myMoveVars();
 		groundNormal = Vector3.zero;
         myStates.Add("walk", typeof(Walk));
 		myStates.Add("run", typeof(Run));
@@ -54,15 +55,28 @@ public class Character : MonoBehaviour
         if (!myStates.Keys.Contains(myBehv))
         {
             myBehv = DefaultBehavior;
-			Debug.Log(myBehv);
+			//Debug.Log(myBehv);
         }
 		myBehvariorS = myBehv;
-        myBehavior = (CharacterBehavior)Activator.CreateInstance(myStates[myBehv]);
+        myBehavior = (CharacterBehavior)Activator.CreateInstance(myStates[myBehv], new object[]{characterValues});
     }
     public void Update()
     {
 		myBehavior.HandleUpdate();
 		myFlags = myController.Move(myBehavior.GetVel() * Time.smoothDeltaTime);
-		myBehavior.dataValues.inAir = (myFlags & CollisionFlags.CollidedBelow) == 0;
+		//myBehavior.dataValues.inAir = (myFlags & CollisionFlags.CollidedBelow) == 0;
+
+		if((myFlags & CollisionFlags.CollidedBelow) == 0)
+		{
+			myBehavior.dataValues.inAir = true;
+		}
+		else
+		{
+			myBehavior.dataValues.inAir = false;
+			characterValues.Vel.y = 0;
+		}
+		//else if(myBehavior.dataValues.inAir) characterValues.Vel.y = 0;
+		//Debug.Log("In Air: " + characterValues.inAir);
+		Debug.Log(myFlags);
     }
 }
