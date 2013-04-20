@@ -12,9 +12,9 @@ namespace MainGameComponents
     
     public class Walk : CharacterBehavior
     {
-        public Walk() : base()
+        public Walk(myMoveVars mv) : base(mv)
         {
-             Debug.Log ("Walking!!!");
+             //Debug.Log ("Walking!!!");
             //No need to change the myMoveVars
         }
 		public override void SetBehv ()
@@ -141,7 +141,7 @@ namespace MainGameComponents
     }
 	public class Run : Walk 
 	{
-		public Run() : base()
+		public Run(myMoveVars mv) : base(mv)
 		{
 			Debug.Log ("RUNNING!!!!");
 			dataValues.hForce = 3.0f ;
@@ -159,9 +159,9 @@ namespace MainGameComponents
 	}
 	public class Hax : Walk
 	{
-		public Hax() : base()
+		public Hax(myMoveVars mv) : base(mv)
 		{
-			Debug.Log ("RUNNING!!!!");
+			//Debug.Log ("RUNNING!!!!");
 			dataValues.hForce = 15.0f;
 		}
 		public override void HandleInput ()
@@ -178,23 +178,23 @@ namespace MainGameComponents
 	
 	public class RedPaint : Walk
 	{
-		public RedPaint() : base()
+		public RedPaint(myMoveVars mv) : base(mv)
 		{
-			Debug.Log("Zooming");
+			//Debug.Log("Zooming");
 			dataValues.hForce = 7.0f;
-			dataValues.maxHSpeed = 10.0f;
+			//dataValues.maxHSpeed = 1000.0f;
 		}
 	}
 	public class BluePaint : Walk
 	{
-		public BluePaint() : base()
+		public BluePaint(myMoveVars mv) : base(mv)
 		{
-			Debug.Log("Bounced");
-			if(!dataValues.inAir)
-			{
-				dataValues.Vel.y += 16.666f;
-				dataValues.inAir = true;
-			}
+
+			dataValues.Vel.y += 16.666f;
+			dataValues.inAir = true;
+			Debug.Log("Bounced: " + dataValues.Vel.y);
+
+			
 		}
 	}
 }

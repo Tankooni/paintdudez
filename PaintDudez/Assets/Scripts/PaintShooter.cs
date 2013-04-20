@@ -4,12 +4,14 @@ using System.Collections.Generic;
 public class PaintShooter : MonoBehaviour
 {
 	//List<PhysicMaterial> physicsMats = new List<PhysicMaterial>();
-	public PhysicMaterial [] physicsMats;
-	public int currentMat = 0;
+	//public PhysicMaterial [] physicsMats;
+	//public int currentMat = 0;
 	Camera cam;
 	public static GameObject splatter = null;
 	GameObject blob = null;
 	GameObject ball = null;
+	
+	Dictionary<string, PaintSplotch> PaintList = new Dictionary<string, PaintSplotch>();
 	
 	#region Picker vars
 	Transform pickObj = null;
@@ -108,6 +110,7 @@ public class PaintShooter : MonoBehaviour
 		Vector3 dir = cam.transform.forward;
 		
 		GameObject paint = Instantiate(blob, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity) as GameObject;
+		//paint.SendMessage("SetPaint", );
 		Physics.IgnoreCollision(paint.collider, collider);
 		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
 
