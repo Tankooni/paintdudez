@@ -19,6 +19,11 @@ public class PaintShooter : MonoBehaviour
 	RaycastHit pickHit;
 	#endregion
 	
+	Transform floatyBall = null;
+	Transform paintSpawn = null;
+	GameObject coreObject = null;
+	GameObject coreInstance = null;
+	GameObject painGun = null;
 	
 	// Use this for initialization
 	void Start()
@@ -29,6 +34,14 @@ public class PaintShooter : MonoBehaviour
 		PaintShooter.splatter = Resources.Load("Prefabs/splatterDecal") as GameObject;
 		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
 		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
+		
+		painGun = transform.Find("PaintGun").gameObject;
+		
+		floatyBall = painGun.transform.Find("b_gun_root/b_gun_ball");
+		paintSpawn = painGun.transform.Find("b_gun_root/b_gun_Shooter");
+		coreObject = Resources.Load("Prefabs/PaintGunCore") as GameObject;
+		coreInstance = Instantiate(coreObject, floatyBall.position, floatyBall.rotation) as GameObject;
+		coreInstance.transform.parent = floatyBall;
 		
 	}
 	
@@ -50,6 +63,7 @@ public class PaintShooter : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			Debug.Log("1");
+			coreInstance.renderer.material.color = Color.blue;
 		}
 		
 		if(Input.GetKey(KeyCode.E))
@@ -107,13 +121,18 @@ public class PaintShooter : MonoBehaviour
 	
 	void ShootPaint()
 	{
-		Vector3 dir = cam.transform.forward;
+//		Vector3 dir = cam.transform.forward;
+//		
+//		GameObject paint = Instantiate(blob, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity) as GameObject;
+//		//paint.SendMessage("SetPaint", );
+//		Physics.IgnoreCollision(paint.collider, collider);
+//		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
 		
-		GameObject paint = Instantiate(blob, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity) as GameObject;
-		//paint.SendMessage("SetPaint", );
+		Vector3 dir = paintSpawn.forward;
+		
+		GameObject paint = Instantiate(blob, paintSpawn.position, Quaternion.identity) as GameObject;
 		Physics.IgnoreCollision(paint.collider, collider);
-		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
-
+		paint.rigidbody.AddForce(paintSpawn.TransformDirection(Vector3.left)*700);
 //		RaycastHit hit;
 //		
 //		
