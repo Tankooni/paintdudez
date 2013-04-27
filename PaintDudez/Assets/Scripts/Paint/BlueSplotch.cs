@@ -14,12 +14,14 @@ public class BlueSplotch : PaintSplotch
 		if(theCollider.gameObject.name == "CubePlayer")
 		{
 			//theCollider.gameObject.SendMessage("SetVelocity", normal*30);
-			theCollider.gameObject.SendMessage("SetBehavior", "BluePaint", SendMessageOptions.DontRequireReceiver);
-			Debug.Log(normal);
+			theCollider.gameObject.SendMessage("SetBehavior", new object[]{"BluePaint", normal});
+			//theCollider.gameObject.SendMessage("SetNormal", normal);
+			//Debug.Log("Normal: " + normal);
 		}
 		else if(theCollider.rigidbody)
 		{
 			theCollider.rigidbody.AddForce(normal*500);
+			//Debug.Log("BlobNormal: " + normal);
 			//Debug.DrawRay(transform.position, normal, Color.cyan, 1000);
 		}
 	}

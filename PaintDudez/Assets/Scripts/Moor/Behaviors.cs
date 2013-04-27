@@ -17,14 +17,19 @@ namespace MainGameComponents
              //Debug.Log ("Walking!!!");
             //No need to change the myMoveVars
         }
-		public override void SetBehv ()
+		public Walk(myMoveVars mv, Vector3 norm) : base(mv, norm)
+        {
+             //Debug.Log ("Walking!!!");
+            //No need to change the myMoveVars
+        }
+		public override void SetBehv()
 		{
 			CurBehv = "walk";
 		}
         public override void HandleInput()
         {
-			Vector3 myMove = new Vector3(0,0,0);
-			Vector3 myRot = new Vector3(0,0,0);
+			Vector3 myMove = Vector3.zero;
+			Vector3 myRot = Vector3.zero;
             if(InputManager.GetKey("Up"))
 				myMove.x += dataValues.hForce;
 			if(InputManager.GetKey("Down"))
@@ -87,9 +92,10 @@ namespace MainGameComponents
 			
 			myVel.y += dataValues.Vel.y;
 			
-			if(dataValues.Vel.y < dataValues.maxVSpeed)
-				myVel.y = dataValues.maxVSpeed;
-			
+			if(dataValues.Vel.y < dataValues.maxVDownSpeed)
+			{
+				myVel.y = dataValues.maxVDownSpeed;
+			}
 			
 			myVel -= dataValues.gForce;
 			
@@ -143,7 +149,6 @@ namespace MainGameComponents
 	{
 		public Run(myMoveVars mv) : base(mv)
 		{
-			Debug.Log ("RUNNING!!!!");
 			dataValues.hForce = 3.0f ;
 		}
 		public override void HandleInput ()
@@ -161,7 +166,6 @@ namespace MainGameComponents
 	{
 		public Hax(myMoveVars mv) : base(mv)
 		{
-			//Debug.Log ("RUNNING!!!!");
 			dataValues.hForce = 15.0f;
 		}
 		public override void HandleInput ()
@@ -180,19 +184,30 @@ namespace MainGameComponents
 	{
 		public RedPaint(myMoveVars mv) : base(mv)
 		{
-			//Debug.Log("Zooming");
 			dataValues.hForce = 7.0f;
 			//dataValues.maxHSpeed = 1000.0f;
 		}
 	}
 	public class BluePaint : Walk
 	{
-		public BluePaint(myMoveVars mv) : base(mv)
+		public BluePaint(myMoveVars mv, Vector3 norm) : base(mv, norm)
 		{
-
-			dataValues.Vel.y += 16.666f;
+			CurBehv = "BluePaint";
+			if(!dataValues.inAir)
+			{
+				Debug.Log("1");
+				dataValues.Vel += myNormal * 30;
+			}
+			else
+			{
+				Debug.Log("2");
+				Vector3 tempVec = myNormal;
+				tempVec.Scale(-dataValues.Vel);
+				dataValues.Vel += tempVec;
+				
+			}
 			dataValues.inAir = true;
-			Debug.Log("Bounced: " + dataValues.Vel.y);
+			//Debug.Log("Bounced: " + dataValues.Vel);
 
 			
 		}

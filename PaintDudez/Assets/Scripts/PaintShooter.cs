@@ -73,10 +73,10 @@ public class PaintShooter : MonoBehaviour
 		if(Input.GetKeyUp(KeyCode.E))
 			DropObject();
 		
-		if(Input.GetKey(KeyCode.Q))
-		{
-			Instantiate(ball, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity);
-		}
+//		if(Input.GetKey(KeyCode.Q))
+//		{
+//			Instantiate(ball, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity);
+//		}
 		if( Input.GetAxis("Mouse ScrollWheel") != 0)
 		{
 			if(pickObj != null)
