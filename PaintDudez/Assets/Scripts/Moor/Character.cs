@@ -50,7 +50,19 @@ public class Character : MonoBehaviour
 	{
 		return myBehvariorS;
 	}
-    public void SetBehavior(string myBehv)
+	
+	public void SetBehavior(object[] o)
+    {
+		string myBehv = (string)o[0];
+        if (!myStates.Keys.Contains(myBehv))
+        {
+            myBehv = DefaultBehavior;
+			//Debug.Log(myBehv);
+        }
+		myBehvariorS = myBehv;
+        myBehavior = (CharacterBehavior)Activator.CreateInstance(myStates[myBehv], new object[]{characterValues, (Vector3)o[1]});
+    }
+	public void SetBehavior(string myBehv)
     {
         if (!myStates.Keys.Contains(myBehv))
         {
@@ -60,12 +72,13 @@ public class Character : MonoBehaviour
 		myBehvariorS = myBehv;
         myBehavior = (CharacterBehavior)Activator.CreateInstance(myStates[myBehv], new object[]{characterValues});
     }
+	
     public void Update()
     {
 		myBehavior.HandleUpdate();
 		myFlags = myController.Move(myBehavior.GetVel() * Time.smoothDeltaTime);
 		//myBehavior.dataValues.inAir = (myFlags & CollisionFlags.CollidedBelow) == 0;
-
+		
 		if((myFlags & CollisionFlags.CollidedBelow) == 0)
 		{
 			myBehavior.dataValues.inAir = true;

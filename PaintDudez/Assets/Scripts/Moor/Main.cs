@@ -9,11 +9,12 @@ using System.IO;
 namespace MainGameComponents
 {
 	public class myMoveVars
-    {
+	{
         //These have to be defined:
         public bool canMove;
         public float maxHSpeed;
-        public float maxVSpeed;
+        public float maxVUpSpeed;
+		public float maxVDownSpeed;
         public Vector3 gForce;
 		public float hForce;
 		public float jForce;
@@ -39,7 +40,8 @@ namespace MainGameComponents
 			hForce = 1.0f;
 			jForce = 16.666f;
             maxHSpeed = 100.0f ;
-            maxVSpeed = -990.0f ;
+            maxVUpSpeed = 40 ;
+			maxVDownSpeed = -100 ;
             gForce = new Vector3(0.0f, 0.6333f, 0.0f);
 
         }
@@ -62,16 +64,25 @@ namespace MainGameComponents
         protected int myState;
         protected Character myChar;
 		public myMoveVars dataValues;
-		protected string CurBehv;
-
-        public CharacterBehavior(myMoveVars mv)
+		public string CurBehv;
+		public Vector3 myNormal;
+		
+		public CharacterBehavior(myMoveVars mv)
 		{
 			dataValues = mv;
 			CurBehv = "none";
-			//dataValues = new myMoveVars();
             myChar = (Character)GameObject.Find("CubePlayer").GetComponent(typeof(Character));
 			SetBehv();
 		}
+		public CharacterBehavior(myMoveVars mv, Vector3 norm)
+		{
+			myNormal = norm;
+			dataValues = mv;
+			CurBehv = "none";
+            myChar = (Character)GameObject.Find("CubePlayer").GetComponent(typeof(Character));
+			SetBehv();
+		}
+
 		
 		public abstract void SetBehv();
         ///<summary>

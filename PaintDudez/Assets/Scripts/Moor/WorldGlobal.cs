@@ -9,7 +9,6 @@ public class WorldGlobal : MonoBehaviour {
 	
 	void Awake () {
 		Init ();
-		Debug.Log("HAHAHAHAHAHA!!");
 		DontDestroyOnLoad(this);
 	}
 	

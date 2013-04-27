@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\Moor\Behaviors.cs" />
      <Compile Include="Assets\Scripts\Moor\Character.cs" />
      <Compile Include="Assets\Scripts\Moor\Main.cs" />
+     <Compile Include="Assets\Scripts\Moor\Vector3Class.cs" />
      <Compile Include="Assets\Scripts\Moor\WorldGlobal.cs" />
      <Compile Include="Assets\Scripts\Paint\BlueSplotch.cs" />
      <Compile Include="Assets\Scripts\Paint\GreenSplotch.cs" />
@@ -57,7 +58,11 @@
      <Compile Include="Assets\Scripts\PaintSplotchScript.cs" />
      <Compile Include="Assets\Scripts\SaveMesh.cs" />
      <Compile Include="Assets\Scripts\SphereZScript.cs" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
