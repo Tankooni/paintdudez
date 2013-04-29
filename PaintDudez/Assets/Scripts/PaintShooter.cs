@@ -35,14 +35,14 @@ public class PaintShooter : MonoBehaviour
 		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
 		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
 		
-		painGun = transform.Find("PaintGun").gameObject;
+		painGun = cam.transform.Find("PaintGun").gameObject;
 		
 		floatyBall = painGun.transform.Find("b_gun_root/b_gun_ball");
 		paintSpawn = painGun.transform.Find("b_gun_root/b_gun_Shooter");
 		coreObject = Resources.Load("Prefabs/PaintGunCore") as GameObject;
 		coreInstance = Instantiate(coreObject, floatyBall.position, floatyBall.rotation) as GameObject;
 		coreInstance.transform.parent = floatyBall;
-		
+		coreInstance.renderer.material.color = Color.blue;
 	}
 	
 	
@@ -106,7 +106,8 @@ public class PaintShooter : MonoBehaviour
 		}
 		else
 		{
-			pickObj.position = pickRay.GetPoint(pickDist);
+			
+			pickObj.rigidbody.MovePosition(pickRay.GetPoint(pickDist));
 			if (pickHit.rigidbody && !pickHit.rigidbody.isKinematic)
 			{
 				pickHit.rigidbody.velocity = Vector3.zero;
@@ -129,10 +130,11 @@ public class PaintShooter : MonoBehaviour
 //		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
 		
 		Vector3 dir = paintSpawn.forward;
-		
 		GameObject paint = Instantiate(blob, paintSpawn.position, Quaternion.identity) as GameObject;
+		paint.renderer.material.color = Color.blue;
 		Physics.IgnoreCollision(paint.collider, collider);
 		paint.rigidbody.AddForce(paintSpawn.TransformDirection(Vector3.left)*700);
+		
 //		RaycastHit hit;
 //		
 //		
