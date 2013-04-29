@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 //using System.Management;
 using System;
-using System.IO;
+//using System.IO;
 
 
 namespace MainGameComponents
@@ -112,7 +112,8 @@ namespace MainGameComponents
         static public void Init()
         {
             Console.WriteLine("Updated...");
-            Load();
+			DefaultLayout();
+            //Load();
         }
 		static private Dictionary<string, int> InputLayout = new Dictionary<string, int>();
 		static string ControlSettingsFile = "ccFile.txt";
@@ -175,6 +176,7 @@ namespace MainGameComponents
             InputLayout.Add("Scream" , KeyCode.Mouse0.GetHashCode());
             InputLayout.Add("LocalChat" , KeyCode.Mouse0.GetHashCode());
 		}
+		/*
         /// <summary>
         /// This will load the current saved key setup
         /// </summary>
@@ -235,7 +237,7 @@ namespace MainGameComponents
                     fWrite.WriteLine(pair.Key + " "+ pair.Value.GetHashCode().ToString());
                 }
             }
-        }
+        }*/
 		
 	}
 	public struct GLOBALVARS

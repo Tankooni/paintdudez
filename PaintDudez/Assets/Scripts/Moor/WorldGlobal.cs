@@ -13,7 +13,7 @@ public class WorldGlobal : MonoBehaviour {
 	}
 	
 	void Update () {
-		//myChar.Update ();
+		//myChar.Update();
 	}
 	void OnLevelWasLoaded() {
 		Init ();
