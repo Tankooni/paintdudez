@@ -13,8 +13,10 @@ public class BlueSplotch : PaintSplotch
 	{
 		if(theCollider.gameObject.name == "CubePlayer")
 		{
+			Debug.LogWarning("Enacting Paint");
 			//theCollider.gameObject.SendMessage("SetVelocity", normal*30);
 			theCollider.gameObject.SendMessage("SetBehavior", new object[]{"BluePaint", normal});
+			//theCollider.gameObject.SendMessage("MoveUpdate");
 			//theCollider.gameObject.SendMessage("SetNormal", normal);
 			//Debug.Log("Normal: " + normal);
 		}

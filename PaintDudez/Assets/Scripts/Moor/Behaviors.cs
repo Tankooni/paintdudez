@@ -89,7 +89,7 @@ namespace MainGameComponents
 			//myVel = Vector3.Cross (Vector3.Cross (Vector3.up,myVel), myChar.groundNormal ).normalized * myVel.magnitude;
 			
 			Debug.DrawLine(myChar.transform.position,myChar.transform.position + myVel,Color.red, 10f);
-			
+			//stuffff
 			myVel.y += dataValues.Vel.y;
 			
 			if(dataValues.Vel.y < dataValues.maxVDownSpeed)
@@ -166,7 +166,7 @@ namespace MainGameComponents
 	{
 		public Hax(myMoveVars mv) : base(mv)
 		{
-			dataValues.hForce = 15.0f;
+			//dataValues.hForce = 15.0f;
 		}
 		public override void HandleInput ()
 		{
@@ -193,21 +193,27 @@ namespace MainGameComponents
 		public BluePaint(myMoveVars mv, Vector3 norm) : base(mv, norm)
 		{
 			CurBehv = "BluePaint";
-
-			
+			Debug.LogWarning("Enacting Paint Behv");
+			Debug.Log(dataValues.Vel.magnitude);
 			if(true)
 			{
-				//Debug.Log("1");
-				dataValues.Vel += myNormal * 20;
+				Debug.Log("1");
+				//dataValues.Vel += myNormal * 20;
+//				Debug.dr
+				//Debug.Log("Original: " + dataValues.Vel);
+				dataValues.Vel = Vector3.Reflect(dataValues.Vel, myNormal.normalized);
+				//Debug.Log("New: " + dataValues.Vel);
+				
 				//dataValues.Vel += Vector3.RotateTowards(dataValues.Vel, myNormal, (float)(Math.PI), 10)*dataValues.Vel.magnitude;
-				Debug.Log(dataValues.Vel);
+				
 			}
 			else
 			{
 				Debug.Log("2");
-				Vector3 tempVec = myNormal;
-				tempVec.Scale(-dataValues.Vel);
-				dataValues.Vel += tempVec;
+//				Vector3 tempVec = myNormal;
+//				//tempVec.Scale(-dataValues.Vel);
+//				dataValues.Vel += tempVec;
+				dataValues.Vel += myNormal * 20;
 				
 			}
 			//dataValues.inAir = true;
