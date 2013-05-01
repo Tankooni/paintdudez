@@ -73,8 +73,16 @@ public class Character : MonoBehaviour
         myBehavior = (CharacterBehavior)Activator.CreateInstance(myStates[myBehv], new object[]{characterValues});
     }
 	
+	public void MoveUpdate()
+	{
+		myBehavior.HandleUpdate();
+		myFlags = myController.Move(myBehavior.GetVel() * Time.smoothDeltaTime);
+		Debug.Log(characterValues.Vel);
+	}
+	
     public void Update()
     {
+		//Debug.LogError("!: " + characterValues.Vel + " " + characterValues.gForce.y);
 		myBehavior.HandleUpdate();
 		myFlags = myController.Move(myBehavior.GetVel() * Time.smoothDeltaTime);
 		//myBehavior.dataValues.inAir = (myFlags & CollisionFlags.CollidedBelow) == 0;
@@ -83,10 +91,13 @@ public class Character : MonoBehaviour
 		{
 			myBehavior.dataValues.inAir = true;
 		}
-		else
+		else if((myFlags & CollisionFlags.CollidedBelow) == CollisionFlags.Below)
 		{
 			myBehavior.dataValues.inAir = false;
-			characterValues.Vel.y = 0;
+			
+			
+			//characterValues.Vel.y = 0;
+			
 		}
 		//else if(myBehavior.dataValues.inAir) characterValues.Vel.y = 0;
 		//Debug.Log("In Air: " + characterValues.inAir);
