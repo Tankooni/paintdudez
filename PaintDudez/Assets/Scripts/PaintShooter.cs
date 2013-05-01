@@ -25,6 +25,8 @@ public class PaintShooter : MonoBehaviour
 	GameObject coreInstance = null;
 	GameObject painGun = null;
 	
+	bool isPaintGunActive = false;
+	
 	// Use this for initialization
 	void Start()
 	{
@@ -72,6 +74,11 @@ public class PaintShooter : MonoBehaviour
 		}
 		if(Input.GetKeyUp(KeyCode.E))
 			DropObject();
+		
+		if(Input.GetKey(KeyCode.B))
+		{
+			painGun.SetActive(true);
+		}
 		
 //		if(Input.GetKey(KeyCode.Q))
 //		{

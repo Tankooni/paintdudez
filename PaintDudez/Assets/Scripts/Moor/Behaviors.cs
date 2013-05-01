@@ -193,10 +193,14 @@ namespace MainGameComponents
 		public BluePaint(myMoveVars mv, Vector3 norm) : base(mv, norm)
 		{
 			CurBehv = "BluePaint";
-			if(!dataValues.inAir)
+
+			
+			if(true)
 			{
-				Debug.Log("1");
-				dataValues.Vel += myNormal * 30;
+				//Debug.Log("1");
+				dataValues.Vel += myNormal * 20;
+				//dataValues.Vel += Vector3.RotateTowards(dataValues.Vel, myNormal, (float)(Math.PI), 10)*dataValues.Vel.magnitude;
+				Debug.Log(dataValues.Vel);
 			}
 			else
 			{
@@ -206,7 +210,7 @@ namespace MainGameComponents
 				dataValues.Vel += tempVec;
 				
 			}
-			dataValues.inAir = true;
+			//dataValues.inAir = true;
 			//Debug.Log("Bounced: " + dataValues.Vel);
 
 			
