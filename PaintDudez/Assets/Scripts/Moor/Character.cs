@@ -90,9 +90,11 @@ public class Character : MonoBehaviour
 			{
 				Debug.Log("Hello");
 				Vector3 temp = characterValues.Vel;
-				//temp.y += hit.distance;
+				temp.y -= hit.distance;
 				characterValues.PrevVel = temp;
 			}
+			else
+				characterValues.PrevVel = Vector3.zero;
 		}
 		
 		myBehavior.HandleUpdate();

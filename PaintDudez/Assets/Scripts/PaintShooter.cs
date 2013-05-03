@@ -36,7 +36,7 @@ public class PaintShooter : MonoBehaviour
 		PaintShooter.splatter = Resources.Load("Prefabs/splatterDecal") as GameObject;
 		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
 		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
-		
+
 		painGun = cam.transform.Find("PaintGun").gameObject;
 		
 		floatyBall = painGun.transform.Find("b_gun_root/b_gun_ball");
