@@ -21,7 +21,8 @@ public abstract class PaintSplotch
 	public virtual void DeEnactPaint(Collider theCollider)
 	{
 		//Debug.Log("left paint");
-		theCollider.gameObject.SendMessage("SetBehavior", "Walk", SendMessageOptions.DontRequireReceiver);
+		if(theCollider.name == "CubePlayer")
+			theCollider.gameObject.SendMessage("SetBehavior", "Walk", SendMessageOptions.DontRequireReceiver);
 	}
 	
 	// Update is called once per frame
