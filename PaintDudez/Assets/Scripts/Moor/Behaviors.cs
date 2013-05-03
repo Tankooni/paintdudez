@@ -12,15 +12,13 @@ namespace MainGameComponents
     
     public class Walk : CharacterBehavior
     {
-        public Walk(myMoveVars mv) : base(mv)
+        public Walk(myMoveVars mv)
+			:this(mv, Vector3.up)
         {
-             //Debug.Log ("Walking!!!");
-            //No need to change the myMoveVars
         }
 		public Walk(myMoveVars mv, Vector3 norm) : base(mv, norm)
         {
-             //Debug.Log ("Walking!!!");
-            //No need to change the myMoveVars
+			dataValues.hForce = 1.0f;
         }
 		public override void SetBehv()
 		{
@@ -28,22 +26,27 @@ namespace MainGameComponents
 		}
         public override void HandleInput()
         {
+			if(dataValues.Vel.y != 0)
+			{
+				
+			}
+			
 			Vector3 myMove = Vector3.zero;
 			Vector3 myRot = Vector3.zero;
             if(InputManager.GetKey("Up"))
-				myMove.x += dataValues.hForce;
+				myMove.x += (dataValues.hForce + dataValues.hForce*dataValues.hAccel);
 			if(InputManager.GetKey("Down"))
-				myMove.x -= dataValues.hForce;
+				myMove.x -= (dataValues.hForce + dataValues.hForce*dataValues.hAccel);
 			if(InputManager.GetKey("Right"))
 				if(!dataValues.FirstPlayer)
 					myRot.y += 2.0f;
 				else
-					myMove.z += dataValues.hForce;
+					myMove.z += (dataValues.hForce + dataValues.hForce*dataValues.hAccel);
 			if(InputManager.GetKey("Left"))
 				if(!dataValues.FirstPlayer)
 					myRot.y -= 2.0f;
 				else
-					myMove.z -= dataValues.hForce;
+					myMove.z -= (dataValues.hForce + dataValues.hForce*dataValues.hAccel);
 			if(InputManager.GetKey ("Behv1"))
 			{
 				if(!dataValues.inAir)
@@ -84,17 +87,21 @@ namespace MainGameComponents
 			/*if(myVel.magnitude > dataValues.maxHSpeed)
 				myVel = Vector3.Scale(myVel.normalized, new Vector3(dataValues.maxHSpeed, 0, dataValues.maxHSpeed));*/
 			myVel.Scale(new Vector3(0.9f,0.0f,0.9f));
-			Debug.DrawLine(myChar.transform.position,myChar.transform.position + myChar.groundNormal,Color.blue, 10f);
+			//Debug.DrawLine(myChar.transform.position,myChar.transform.position + myChar.groundNormal,Color.blue, 10f);
 			//Ground Compenation!
 			//myVel = Vector3.Cross (Vector3.Cross (Vector3.up,myVel), myChar.groundNormal ).normalized * myVel.magnitude;
 			
-			Debug.DrawLine(myChar.transform.position,myChar.transform.position + myVel,Color.red, 10f);
+			//Debug.DrawLine(myChar.transform.position,myChar.transform.position + myVel,Color.red, 10f);
 			//stuffff
 			myVel.y += dataValues.Vel.y;
 			
 			if(dataValues.Vel.y < dataValues.maxVDownSpeed)
 			{
 				myVel.y = dataValues.maxVDownSpeed;
+			}
+			else if(dataValues.Vel.y > dataValues.maxVUpSpeed)
+			{
+				
 			}
 			
 			myVel -= dataValues.gForce;
@@ -193,33 +200,21 @@ namespace MainGameComponents
 		public BluePaint(myMoveVars mv, Vector3 norm) : base(mv, norm)
 		{
 			CurBehv = "BluePaint";
-			Debug.LogWarning("Enacting Paint Behv");
-			Debug.Log(dataValues.Vel.magnitude);
-			if(true)
+			
+//			Debug.Log("PrevVel: " + dataValues.PrevVel);
+			//Debug.Log("VelMag: " + dataValues.PrevVel.magnitude);
+			if(dataValues.PrevVel.magnitude < 20)
 			{
 				Debug.Log("1");
-				//dataValues.Vel += myNormal * 20;
-//				Debug.dr
-				//Debug.Log("Original: " + dataValues.Vel);
-				dataValues.Vel = Vector3.Reflect(dataValues.Vel, myNormal.normalized);
-				//Debug.Log("New: " + dataValues.Vel);
-				
-				//dataValues.Vel += Vector3.RotateTowards(dataValues.Vel, myNormal, (float)(Math.PI), 10)*dataValues.Vel.magnitude;
+				dataValues.Vel = myNormal * 20;
 				
 			}
 			else
 			{
 				Debug.Log("2");
-//				Vector3 tempVec = myNormal;
-//				//tempVec.Scale(-dataValues.Vel);
-//				dataValues.Vel += tempVec;
-				dataValues.Vel += myNormal * 20;
-				
-			}
-			//dataValues.inAir = true;
-			//Debug.Log("Bounced: " + dataValues.Vel);
-
-			
+				dataValues.Vel = Vector3.Reflect(new Vector3(dataValues.Vel.x, dataValues.PrevVel.y, dataValues.Vel.z), myNormal.normalized);
+			}	
+			dataValues.PrevVel = Vector3.zero;
 		}
 	}
 }

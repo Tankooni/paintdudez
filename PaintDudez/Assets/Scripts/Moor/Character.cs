@@ -77,27 +77,40 @@ public class Character : MonoBehaviour
 	{
 		myBehavior.HandleUpdate();
 		myFlags = myController.Move(myBehavior.GetVel() * Time.smoothDeltaTime);
-		Debug.Log(characterValues.Vel);
 	}
 	
     public void Update()
     {
 		//Debug.LogError("!: " + characterValues.Vel + " " + characterValues.gForce.y);
+		if(characterValues.Vel.y < 0 && Math.Abs(characterValues.Vel.y * Time.smoothDeltaTime) > 0)
+		{
+			RaycastHit hit;
+			//Debug.DrawRay(new Vector3(transform.position.x, transform.position.y - myController.height/2, transform.position.z), new Vector3(0, characterValues.Vel.y * Time.smoothDeltaTime,0), Color.red, 1000);
+			if(Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y - myController.height/2, transform.position.z), new Vector3(0,characterValues.Vel.normalized.y,0)), out hit, Math.Abs(characterValues.Vel.y * Time.smoothDeltaTime)))
+			{
+				Debug.Log("Hello");
+				Vector3 temp = characterValues.Vel;
+				//temp.y += hit.distance;
+				characterValues.PrevVel = temp;
+			}
+		}
+		
 		myBehavior.HandleUpdate();
 		myFlags = myController.Move(myBehavior.GetVel() * Time.smoothDeltaTime);
 		//myBehavior.dataValues.inAir = (myFlags & CollisionFlags.CollidedBelow) == 0;
 		
 		if((myFlags & CollisionFlags.CollidedBelow) == 0)
 		{
-			myBehavior.dataValues.inAir = true;
+			characterValues.inAir = true;
 		}
 		else if((myFlags & CollisionFlags.CollidedBelow) == CollisionFlags.Below)
 		{
-			myBehavior.dataValues.inAir = false;
-			
-			
-			//characterValues.Vel.y = 0;
-			
+			characterValues.inAir = false;
+			characterValues.Vel.y = 0;
+		}
+		if((myFlags & CollisionFlags.CollidedAbove) == (CollisionFlags.Above))
+		{
+			characterValues.Vel.y = 0;
 		}
 		//else if(myBehavior.dataValues.inAir) characterValues.Vel.y = 0;
 		//Debug.Log("In Air: " + characterValues.inAir);

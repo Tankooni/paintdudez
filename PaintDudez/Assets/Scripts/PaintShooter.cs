@@ -69,12 +69,9 @@ public class PaintShooter : MonoBehaviour
 		}
 		
 		if(Input.GetKey(KeyCode.E))
-		{
 			PickObject();
-		}
 		if(Input.GetKeyUp(KeyCode.E))
 			DropObject();
-		
 		if(Input.GetKey(KeyCode.B))
 		{
 			painGun.SetActive(true);
@@ -136,7 +133,7 @@ public class PaintShooter : MonoBehaviour
 //		Physics.IgnoreCollision(paint.collider, collider);
 //		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
 		
-		Vector3 dir = paintSpawn.forward;
+//		Vector3 dir = paintSpawn.forward;
 		GameObject paint = Instantiate(blob, paintSpawn.position, Quaternion.identity) as GameObject;
 		paint.renderer.material.color = Color.blue;
 		Physics.IgnoreCollision(paint.collider, collider);

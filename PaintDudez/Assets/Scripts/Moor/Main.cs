@@ -17,6 +17,7 @@ namespace MainGameComponents
 		public float maxVDownSpeed;
         public Vector3 gForce;
 		public float hForce;
+		public float hAccel;
 		public float jForce;
 		public bool FirstPlayer = true;
 		
@@ -30,6 +31,7 @@ namespace MainGameComponents
 		
         //Per loop basis modified
         public Vector3 Vel;
+		public Vector3 PrevVel;
         public bool inAir;
         public Vector3 jumpVel;
 
@@ -38,6 +40,7 @@ namespace MainGameComponents
 			FirstPlayer = true;
             canMove = true;
 			hForce = 1.0f;
+			hAccel = 0.0f;
 			jForce = 16.666f;
             maxHSpeed = 100.0f ;
             maxVUpSpeed = 40 ;
