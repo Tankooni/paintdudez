@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PaintSplotch
+public abstract class PaintSplotch
 {
 	public Color color = Color.white;
 	public Vector3 normal;

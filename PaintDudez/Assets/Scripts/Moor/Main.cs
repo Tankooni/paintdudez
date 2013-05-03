@@ -18,6 +18,7 @@ namespace MainGameComponents
         public Vector3 gForce;
 		public float hForce;
 		public float hAccel;
+		public float hAccelDeg;
 		public float jForce;
 		public bool FirstPlayer = true;
 		
@@ -41,6 +42,7 @@ namespace MainGameComponents
             canMove = true;
 			hForce = 1.0f;
 			hAccel = 0.0f;
+			hAccelDeg = -0.1f;
 			jForce = 16.666f;
             maxHSpeed = 100.0f ;
             maxVUpSpeed = 40 ;

@@ -15,10 +15,10 @@ public class GreenSplotch : PaintSplotch
 		if(theCollider.rigidbody && theCollider.name != "Player")
 		{
 			Debug.Log(theCollider);
-			theCollider.rigidbody.isKinematic =true;
-//			theCollider.rigidbody.velocity = Vector3.zero;
-//			theCollider.rigidbody.angularVelocity = Vector3.zero;
-//			theCollider.transform.parent = myObject.transform;
+			//theCollider.rigidbody.isKinematic =true;
+			//theCollider.rigidbody.velocity = Vector3.zero;
+			//theCollider.rigidbody.angularVelocity = Vector3.zero;
+			theCollider.transform.parent = myObject.transform;
 		}
 		
 	}

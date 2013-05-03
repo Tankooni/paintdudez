@@ -25,6 +25,7 @@ public class PaintBlobScript : MonoBehaviour
 				decal.transform.localScale = new Vector3(Random.Range(1.0f, 4.0f), decal.transform.localScale.y, Random.Range(1.0f, 4.0f));
 				//decal.transform.parent = contact.otherCollider.transform;
 				decal.SendMessage("SetNormal", contact.normal);
+				decal.SendMessage("SetSplotch", typeof(GreenSplotch));
 			}
 			
 //			foreach (ContactPoint contact in col.contacts)
