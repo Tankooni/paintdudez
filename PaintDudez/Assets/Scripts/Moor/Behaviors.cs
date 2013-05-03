@@ -60,8 +60,8 @@ namespace MainGameComponents
 			{
 				if(InputManager.GetKey ("Mod3"))
 					myChar.SetBehavior("run");
-				if(InputManager.GetKey ("Mod2"))
-					myChar.SetBehavior("hax");
+//				if(InputManager.GetKey ("Mod2"))
+//					myChar.SetBehavior("hax");
 			}
 			myChar.transform.rotation = Quaternion.Euler(myChar.transform.rotation.eulerAngles + myRot);
 			
@@ -191,7 +191,7 @@ namespace MainGameComponents
 	{
 		public RedPaint(myMoveVars mv) : base(mv)
 		{
-			dataValues.hForce = 7.0f;
+			dataValues.hAccel = 7.0f;
 			//dataValues.maxHSpeed = 1000.0f;
 		}
 	}

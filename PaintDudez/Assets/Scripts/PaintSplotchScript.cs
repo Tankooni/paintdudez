@@ -1,18 +1,26 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PaintSplotchScript : MonoBehaviour
 {
 	MeshFilter mf;
 	Vector3 normal;
-	PaintSplotch paint;
+	PaintSplotch paint = null;
 	
 	// Use this for initialization
 	void Start()
 	{
 		mf = GetComponent<MeshFilter>();
-		paint = new BlueSplotch(gameObject);
+		if(paint == null)
+			paint = new BlueSplotch(gameObject);
 		paint.normal = normal;
+	}
+	
+	void SetSplotch(Type t)
+	{
+		paint = (PaintSplotch)Activator.CreateInstance(t, new object[]{gameObject});
 	}
 	
 	void OnTriggerEnter(Collider col)
@@ -23,13 +31,15 @@ public class PaintSplotchScript : MonoBehaviour
 	
 	void OnTriggerExit(Collider col)
 	{
-		paint.DeEnactPaint(col);
+		if(paint != null)
+			paint.DeEnactPaint(col);
 	}
 	
 	// Update is called once per frame
 	void Update()
 	{
-		paint.Update();
+		if(paint != null)
+			paint.Update();
 //		foreach(Vector3 poin in mf.mesh.vertices)
 //		{
 //			
