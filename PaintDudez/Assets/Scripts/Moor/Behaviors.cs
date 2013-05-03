@@ -26,10 +26,10 @@ namespace MainGameComponents
 		}
         public override void HandleInput()
         {
-//			if(dataValues.Vel.y == 0)
-//			{
-//				dataValues.PrevVel = Vector3.zero;
-//			}
+			if(dataValues.Vel.y != 0)
+			{
+				dataValues.PrevVel = dataValues.Vel;
+			}
 			
 			Vector3 myMove = Vector3.zero;
 			Vector3 myRot = Vector3.zero;
@@ -203,19 +203,18 @@ namespace MainGameComponents
 			
 //			Debug.Log("PrevVel: " + dataValues.PrevVel);
 			//Debug.Log("VelMag: " + dataValues.PrevVel.magnitude);
-			Debug.Log("RevMag: " + dataValues.PrevVel.magnitude);
+			//Debug.Log("RevMag: " + dataValues.PrevVel.magnitude);
 			if(dataValues.PrevVel.magnitude < 20)
 			{
-				Debug.Log("1");
+				//Debug.Log("1");
 				dataValues.Vel = myNormal * 20;
-				
 			}
 			else
 			{
-				Debug.Log("2");
+				//Debug.Log("2");
 				dataValues.Vel = Vector3.Reflect(new Vector3(dataValues.Vel.x, dataValues.PrevVel.y, dataValues.Vel.z), myNormal.normalized);
 			}
-			Debug.Log("RevMag: " + dataValues.Vel.magnitude);
+			//Debug.Log("RevMag: " + dataValues.Vel.magnitude);
 			//dataValues.PrevVel = Vector3.zero;
 		}
 	}
