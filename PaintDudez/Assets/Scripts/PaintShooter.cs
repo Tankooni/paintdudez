@@ -1,5 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+
+public class paintStruct
+{
+	public Type paintColor;
+	public Color ballColor;
+	
+	public paintStruct(Type paintColorIN, Color ballColorIN)
+	{
+		paintColor = paintColorIN;
+		ballColor = ballColorIN;
+	}
+}
+
 
 public class PaintShooter : MonoBehaviour
 {
@@ -13,6 +27,9 @@ public class PaintShooter : MonoBehaviour
 	
 	Dictionary<string, PaintSplotch> PaintList = new Dictionary<string, PaintSplotch>();
 	
+	//List of paint in the gun
+	paintStruct[] ammoType = new paintStruct[10];
+	
 	#region Picker vars
 	Transform pickObj = null;
 	float pickDist;
@@ -25,11 +42,21 @@ public class PaintShooter : MonoBehaviour
 	GameObject coreInstance = null;
 	GameObject painGun = null;
 	
+	paintStruct currentActivePaint;
+	
 	bool isPaintGunActive = false;
 	
 	// Use this for initialization
 	void Start()
 	{
+		//Blue paint
+		//ammoType.Add(new paintStruct(typeof(BlueSplotch), Color.blue));
+		ammoType[0] = new paintStruct(typeof(BlueSplotch), Color.blue);
+		ammoType[1] = new paintStruct(typeof(GreenSplotch), Color.green);
+		ammoType[2] = new paintStruct(typeof(RedSplotch), Color.red);
+		//Set the current active color to our inital paint (Blue paint)
+		currentActivePaint = ammoType[0];
+		
 		//physicsMats = Resources.LoadAll("PhysMats") as PhysicMaterial;
 		//cam = GetComponentInChildren<Camera>() as Camera;
 		cam = Camera.main;
@@ -63,10 +90,28 @@ public class PaintShooter : MonoBehaviour
 		}
 		
 		if(Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			Debug.Log("1");
-			coreInstance.renderer.material.color = Color.blue;
-		}
+	    {
+			currentActivePaint = ammoType[0];
+			coreInstance.renderer.material.color = currentActivePaint.ballColor;
+	    }
+	    else if(Input.GetKeyDown(KeyCode.Alpha2))
+	    {
+			currentActivePaint = ammoType[1];
+			coreInstance.renderer.material.color = currentActivePaint.ballColor;
+	    }
+	    else if(Input.GetKeyDown (KeyCode.Alpha3))
+	    {
+			currentActivePaint = ammoType[2];
+			coreInstance.renderer.material.color = currentActivePaint.ballColor;
+	    }
+		else if(Input.GetKeyDown (KeyCode.Alpha4))
+	    {
+			if(ammoType[3] != null)
+			{
+				currentActivePaint = ammoType[3];
+				coreInstance.renderer.material.color = currentActivePaint.ballColor;
+			}
+	    }
 		
 		if(Input.GetKey(KeyCode.E))
 			PickObject();
@@ -135,7 +180,8 @@ public class PaintShooter : MonoBehaviour
 		
 //		Vector3 dir = paintSpawn.forward;
 		GameObject paint = Instantiate(blob, paintSpawn.position, Quaternion.identity) as GameObject;
-		paint.renderer.material.color = Color.blue;
+		paint.SendMessage("setMyPaint", currentActivePaint);
+		paint.renderer.material.color = currentActivePaint.ballColor;
 		Physics.IgnoreCollision(paint.collider, collider);
 		paint.rigidbody.AddForce(paintSpawn.TransformDirection(Vector3.left)*700);
 		

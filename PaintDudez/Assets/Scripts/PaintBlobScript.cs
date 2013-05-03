@@ -3,11 +3,16 @@ using System.Collections;
 
 public class PaintBlobScript : MonoBehaviour
 {
-
+	paintStruct myPaint;
 	// Use this for initialization
 	void Start()
 	{
-		
+			
+	}
+	
+	void setMyPaint(paintStruct paintIN)
+	{
+		myPaint = paintIN;
 	}
 	
 	void OnCollisionEnter(Collision col)
@@ -25,7 +30,7 @@ public class PaintBlobScript : MonoBehaviour
 				decal.transform.localScale = new Vector3(Random.Range(1.0f, 4.0f), decal.transform.localScale.y, Random.Range(1.0f, 4.0f));
 				//decal.transform.parent = contact.otherCollider.transform;
 				decal.SendMessage("SetNormal", contact.normal);
-				decal.SendMessage("SetSplotch", typeof(GreenSplotch));
+				decal.SendMessage("SetSplotch", myPaint.paintColor);
 			}
 			
 //			foreach (ContactPoint contact in col.contacts)
