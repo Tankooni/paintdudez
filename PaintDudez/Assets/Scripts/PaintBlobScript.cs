@@ -7,7 +7,6 @@ public class PaintBlobScript : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-			
 	}
 	
 	void setMyPaint(paintStruct paintIN)
@@ -29,6 +28,11 @@ public class PaintBlobScript : MonoBehaviour
 				GameObject decal = Instantiate(PaintShooter.splatter, hit.point + (contact.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, contact.normal)) as GameObject;
 				decal.transform.localScale = new Vector3(Random.Range(1.0f, 4.0f), decal.transform.localScale.y, Random.Range(1.0f, 4.0f));
 				//decal.transform.parent = contact.otherCollider.transform;
+				
+				AudioSource tempSource = audio;
+				tempSource.pitch = 2.0f;
+				audio.PlayOneShot(WorldGlobal.audioClips["splat"]);
+				
 				decal.SendMessage("SetNormal", contact.normal);
 				decal.SendMessage("SetSplotch", myPaint.paintColor);
 			}
