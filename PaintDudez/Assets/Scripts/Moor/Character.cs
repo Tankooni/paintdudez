@@ -119,4 +119,9 @@ public class Character : MonoBehaviour
 		//else if(myBehavior.dataValues.inAir) characterValues.Vel.y = 0;
 		//Debug.Log("In Air: " + characterValues.inAir);
     }
+	
+	public void GetVel(RedSplotch rs)
+	{
+		rs.charVals = characterValues;
+	}
 }

@@ -46,6 +46,7 @@ public class PaintShooter : MonoBehaviour
 	
 	bool isPaintGunActive = false;
 	
+	
 	// Use this for initialization
 	void Start()
 	{
@@ -184,6 +185,13 @@ public class PaintShooter : MonoBehaviour
 		paint.renderer.material.color = currentActivePaint.ballColor;
 		Physics.IgnoreCollision(paint.collider, collider);
 		paint.rigidbody.AddForce(paintSpawn.TransformDirection(Vector3.left)*700);
+		
+		AudioSource tempSource = audio;
+		tempSource.pitch = 3.0f;
+		tempSource.volume = 0.5f;
+		tempSource.PlayOneShot(WorldGlobal.audioClips["shoot"]);
+		
+		//shootSfx.Play();
 		
 //		RaycastHit hit;
 //		
