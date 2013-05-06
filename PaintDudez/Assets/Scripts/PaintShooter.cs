@@ -85,11 +85,20 @@ public class PaintShooter : MonoBehaviour
 		{
 			Screen.lockCursor = !(Screen.lockCursor);
 		}
-		
-		if(Input.GetMouseButtonDown(0))
-		{
-			ShootPaint();
-		}
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (pickObj == null)
+            {
+                ShootPaint();
+            }
+            else
+            {
+                //Add force to cube and send it flying
+                pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300);
+                pickObj = null;
+            }
+        }
+
 		
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 	    {
@@ -114,11 +123,12 @@ public class PaintShooter : MonoBehaviour
 				coreInstance.renderer.material.color = currentActivePaint.ballColor;
 			}
 	    }
-		
-		if(Input.GetKey(KeyCode.E))
-			PickObject();
-		if(Input.GetKeyUp(KeyCode.E))
-			DropObject();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            toggleObject();
+        }
+
 		if(Input.GetKey(KeyCode.B))
 		{
 			painGun.SetActive(true);
@@ -132,17 +142,70 @@ public class PaintShooter : MonoBehaviour
 		{
 			if(pickObj != null)
 			{
-				pickDist += Input.GetAxis("Mouse ScrollWheel") * 3;
+                if ((pickDist >= 1.3) && (Input.GetAxis("Mouse ScrollWheel") < 0))
+                {
+                    Debug.Log("Out");
+                    pickDist += Input.GetAxis("Mouse ScrollWheel") * 3;
+                }
+                else if (pickDist <= 3 && (Input.GetAxis("Mouse ScrollWheel") > 0))
+                {
+                    Debug.Log("In");
+                    pickDist += Input.GetAxis("Mouse ScrollWheel") * 3;
+                }
 			}
 		}
+
+        //Hold object in place
+        if (pickObj != null)
+        {
+            //Make a new raycast to where we are pointing
+            Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
+            //Move the object we've picked up to the previously defined ray position
+            pickObj.rigidbody.MovePosition(pickRay.GetPoint(pickDist));
+            if (pickHit.rigidbody && !pickHit.rigidbody.isKinematic)
+            {
+                pickHit.rigidbody.velocity = Vector3.zero;
+            }
+        }
 	}
+
+    void toggleObject()
+    {
+        Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!pickObj)
+        {
+            if (Physics.Raycast(pickRay, out pickHit, 2.5f) && pickHit.transform.tag == "Pick")
+            {
+                Debug.DrawLine(pickRay.origin, pickHit.point, Color.magenta);
+                if (pickHit.rigidbody && !pickHit.rigidbody.isKinematic)
+                {
+                    pickHit.rigidbody.velocity = Vector3.zero;
+                    pickHit.rigidbody.angularVelocity = Vector3.zero;
+                }
+                pickObj = pickHit.transform;
+                pickDist = Vector3.Distance(pickObj.position, Camera.main.transform.position);
+            }
+        }
+        else
+        {
+            pickObj = null;
+        }
+    }
 	
+
+
+
+
+
+
+    //Waffles
 	void PickObject()
-	{
-		Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		
+	{	
+        //Get an object and pick it up
 		if(!pickObj)
 		{
+            Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(pickRay, out pickHit) && pickHit.transform.tag == "Pick")
 			{
 				Debug.DrawLine(pickRay.origin, pickHit.point, Color.magenta);
@@ -155,17 +218,15 @@ public class PaintShooter : MonoBehaviour
 				pickDist = Vector3.Distance(pickObj.position, Camera.main.transform.position);
 			}
 		}
+        
+        //Drop the held object
 		else
 		{
-			
-			pickObj.rigidbody.MovePosition(pickRay.GetPoint(pickDist));
-			if (pickHit.rigidbody && !pickHit.rigidbody.isKinematic)
-			{
-				pickHit.rigidbody.velocity = Vector3.zero;
-			}
+            pickObj = null;
 		}
 	}
 	
+    //Waffles
 	void DropObject()
 	{
 		pickObj = null;
