@@ -16,14 +16,17 @@ public class PaintBlobScript : MonoBehaviour
 	
 	void OnCollisionEnter(Collision col)
 	{
-		if(col.gameObject.tag != "Paint")
+		Debug.Log(col.gameObject.layer);
+		if(col.gameObject.layer != 8)
 		{
 			ContactPoint contact = col.contacts[0];
-			Ray ray = new Ray(contact.point + contact.normal, -contact.normal);
+			Ray ray = new Ray(contact.point + contact.normal*3, -contact.normal);
+			Debug.DrawLine(contact.point + contact.normal*3, contact.point + contact.normal*3, Color.cyan, 1000);
 			RaycastHit hit;
+			LayerMask lm = ~(1 << 8);
 			if (Physics.Raycast(ray, out hit, 1000))
 			{
-				Debug.DrawRay(hit.point, hit.normal, Color.red, 1000);
+				//Debug.DrawRay(hit.point, hit.normal, Color.red, 1000);
 
 				GameObject decal = Instantiate(WorldGlobal.Prefabs["splatter"], hit.point + (contact.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, contact.normal)) as GameObject;
 				decal.transform.localScale = new Vector3(Random.Range(1.0f, 4.0f), decal.transform.localScale.y, Random.Range(1.0f, 4.0f));
