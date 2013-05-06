@@ -21,7 +21,6 @@ public class PaintShooter : MonoBehaviour
 	//public PhysicMaterial [] physicsMats;
 	//public int currentMat = 0;
 	Camera cam;
-	public static GameObject splatter = null;
 	GameObject blob = null;
 	GameObject ball = null;
 	
@@ -61,15 +60,16 @@ public class PaintShooter : MonoBehaviour
 		//physicsMats = Resources.LoadAll("PhysMats") as PhysicMaterial;
 		//cam = GetComponentInChildren<Camera>() as Camera;
 		cam = Camera.main;
-		PaintShooter.splatter = Resources.Load("Prefabs/splatterDecal") as GameObject;
-		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
-		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
+//		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
+//		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
+		blob = WorldGlobal.Prefabs["blob"];
+		ball = WorldGlobal.Prefabs["ball"];
 
 		painGun = cam.transform.Find("PaintGun").gameObject;
 		
 		floatyBall = painGun.transform.Find("b_gun_root/b_gun_ball");
 		paintSpawn = painGun.transform.Find("b_gun_root/b_gun_Shooter");
-		coreObject = Resources.Load("Prefabs/PaintGunCore") as GameObject;
+		coreObject = WorldGlobal.Prefabs["gunCore"];
 		coreInstance = Instantiate(coreObject, floatyBall.position, floatyBall.rotation) as GameObject;
 		coreInstance.transform.parent = floatyBall;
 		coreInstance.renderer.material.color = Color.blue;
@@ -80,6 +80,7 @@ public class PaintShooter : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		Debug.Log("Gun Vel: " + rigidbody.velocity);
 		if(Input.GetMouseButtonDown(1))
 		{
 			Screen.lockCursor = !(Screen.lockCursor);
@@ -123,10 +124,10 @@ public class PaintShooter : MonoBehaviour
 			painGun.SetActive(true);
 		}
 		
-//		if(Input.GetKey(KeyCode.Q))
-//		{
-//			Instantiate(ball, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity);
-//		}
+		if(Input.GetKey(KeyCode.Q))
+		{
+			Instantiate(ball, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity);
+		}
 		if( Input.GetAxis("Mouse ScrollWheel") != 0)
 		{
 			if(pickObj != null)
