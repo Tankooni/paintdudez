@@ -9,6 +9,7 @@ public class WorldGlobal : MonoBehaviour {
 	//Character myChar;
 	public static Dictionary<string, AudioClip> audioClips;
 	public static Dictionary<string, GameObject> Prefabs;
+	public static Dictionary<string, Material> Materials;
 	
 	void Awake () {
 		Init ();
@@ -29,6 +30,8 @@ public class WorldGlobal : MonoBehaviour {
 		audioClips.Add("bounce", Resources.Load("Sounds/bounce") as AudioClip);
 		audioClips.Add("ballBounce", Resources.Load("Sounds/ballBounce") as AudioClip);
 		audioClips.Add("speedPaint", Resources.Load("Sounds/speedPaint") as AudioClip);
+		audioClips.Add("clean", Resources.Load("Sounds/erasePaint") as AudioClip);
+		audioClips.Add("grow", Resources.Load("Sounds/growPaint") as AudioClip);
 		
 		Prefabs = new Dictionary<string, GameObject>();
 		Prefabs.Add("blob", Resources.Load("Prefabs/paintBlob") as GameObject);
@@ -36,5 +39,9 @@ public class WorldGlobal : MonoBehaviour {
 		Prefabs.Add("gunCore", Resources.Load("Prefabs/PaintGunCore") as GameObject);
 		Prefabs.Add("splatter", Resources.Load("Prefabs/splatterDecal") as GameObject);
 		Prefabs.Add("growthBlock", Resources.Load("Prefabs/GrowthBlock") as GameObject);
+		
+		Materials = new Dictionary<string, Material>();
+		Materials.Add("bubble", Resources.Load("Materials/SoapBubble") as Material);
+		Materials.Add("default", Resources.Load("Materials/lambert1") as Material);
 	}
 }

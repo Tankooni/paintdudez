@@ -14,8 +14,17 @@ public abstract class PaintSplotch
 	
 	public virtual void EnactPaint(Collider theCollider)
 	{
+		Debug.Log(theCollider.gameObject.tag);
+		if(theCollider.gameObject.tag == "Bubble")
+		{
+			AudioSource.PlayClipAtPoint(WorldGlobal.audioClips["clean"], theCollider.transform.position, 8.0f);
+			
+			GameObject.Destroy(theCollider.gameObject);
+			GameObject.Destroy(myObject);
+		}
 		if(myObject == theCollider.gameObject)
 			return;
+		
 	}
 	
 	public virtual void DeEnactPaint(Collider theCollider)

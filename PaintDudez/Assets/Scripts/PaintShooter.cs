@@ -2,15 +2,17 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class paintStruct
+public class PaintStruct
 {
-	public Type paintColor;
+	public Type paintType;
 	public Color ballColor;
+	public Material material;
 	
-	public paintStruct(Type paintColorIN, Color ballColorIN)
+	public PaintStruct(Type paintTypeIN, Color ballColorIN, Material materialIN)
 	{
-		paintColor = paintColorIN;
+		paintType = paintTypeIN;
 		ballColor = ballColorIN;
+		material = materialIN;
 	}
 }
 
@@ -27,7 +29,8 @@ public class PaintShooter : MonoBehaviour
 	Dictionary<string, PaintSplotch> PaintList = new Dictionary<string, PaintSplotch>();
 	
 	//List of paint in the gun
-	paintStruct[] ammoType = new paintStruct[10];
+	PaintStruct[] ammoType = new PaintStruct[10];
+	PaintStruct cleanAmmo = null;
 	
 	#region Picker vars
 	Transform pickObj = null;
@@ -41,7 +44,7 @@ public class PaintShooter : MonoBehaviour
 	GameObject coreInstance = null;
 	GameObject painGun = null;
 	
-	paintStruct currentActivePaint;
+	PaintStruct currentActivePaint;
 	
 	bool isPaintGunActive = false;
 	
@@ -51,10 +54,13 @@ public class PaintShooter : MonoBehaviour
 	{
 		//Blue paint
 		//ammoType.Add(new paintStruct(typeof(BlueSplotch), Color.blue));
-		ammoType[0] = new paintStruct(typeof(BlueSplotch), Color.blue);
-		ammoType[1] = new paintStruct(typeof(GreenSplotch), Color.green);
-		ammoType[2] = new paintStruct(typeof(RedSplotch), Color.red);
-		ammoType[3] = new paintStruct(typeof(GrowSplotch), Color.black);
+		ammoType[0] = new PaintStruct(typeof(BlueSplotch), Color.blue, WorldGlobal.Materials["default"]);
+		ammoType[1] = new PaintStruct(typeof(GreenSplotch), Color.green, WorldGlobal.Materials["default"]);
+		ammoType[2] = new PaintStruct(typeof(RedSplotch), Color.red, WorldGlobal.Materials["default"]);
+		ammoType[3] = new PaintStruct(typeof(GrowSplotch), Color.black, WorldGlobal.Materials["default"]);
+		
+		cleanAmmo = new PaintStruct(typeof(CleanSplotch), new Color(0,0,0,0), WorldGlobal.Materials["bubble"]);
+		
 		//Set the current active color to our inital paint (Blue paint)
 		currentActivePaint = ammoType[0];
 		
@@ -81,16 +87,30 @@ public class PaintShooter : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.Tab))
+		{
+			Screen.lockCursor = !(Screen.lockCursor);	
+		}
+		
 		//Debug.Log("Gun Vel: " + rigidbody.velocity);
 		if(Input.GetMouseButtonDown(1))
 		{
-			Screen.lockCursor = !(Screen.lockCursor);
+            if (pickObj == null)
+            {
+                ShootPaint(cleanAmmo);
+            }
+            else
+            {
+                //Add force to cube and send it flying
+                pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300);
+                pickObj = null;
+            }
 		}
         if (Input.GetMouseButtonDown(0))
         {
             if (pickObj == null)
             {
-                ShootPaint();
+                ShootPaint(currentActivePaint);
             }
             else
             {
@@ -229,7 +249,7 @@ public class PaintShooter : MonoBehaviour
 		pickObj = null;
 	}
 	
-	void ShootPaint()
+	void ShootPaint(PaintStruct ammoType)
 	{
 //		Vector3 dir = cam.transform.forward;
 //		
@@ -240,8 +260,8 @@ public class PaintShooter : MonoBehaviour
 		
 //		Vector3 dir = paintSpawn.forward;
 		GameObject paint = Instantiate(blob, paintSpawn.position, Quaternion.identity) as GameObject;
-		paint.SendMessage("setMyPaint", currentActivePaint);
-		paint.renderer.material.color = currentActivePaint.ballColor;
+		paint.SendMessage("setMyPaint", ammoType);
+		
 		Physics.IgnoreCollision(paint.collider, collider);
 		paint.rigidbody.AddForce(paintSpawn.TransformDirection(Vector3.left)*700);
 		
