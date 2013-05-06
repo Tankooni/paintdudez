@@ -54,6 +54,7 @@ public class PaintShooter : MonoBehaviour
 		ammoType[0] = new paintStruct(typeof(BlueSplotch), Color.blue);
 		ammoType[1] = new paintStruct(typeof(GreenSplotch), Color.green);
 		ammoType[2] = new paintStruct(typeof(RedSplotch), Color.red);
+		ammoType[3] = new paintStruct(typeof(GrowSplotch), Color.black);
 		//Set the current active color to our inital paint (Blue paint)
 		currentActivePaint = ammoType[0];
 		
@@ -133,11 +134,7 @@ public class PaintShooter : MonoBehaviour
 		{
 			painGun.SetActive(true);
 		}
-		
-		if(Input.GetKey(KeyCode.Q))
-		{
-			Instantiate(ball, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity);
-		}
+
 		if( Input.GetAxis("Mouse ScrollWheel") != 0)
 		{
 			if(pickObj != null)

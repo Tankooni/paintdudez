@@ -35,5 +35,6 @@ public class WorldGlobal : MonoBehaviour {
 		Prefabs.Add("ball", Resources.Load("Prefabs/SphereZ") as GameObject);
 		Prefabs.Add("gunCore", Resources.Load("Prefabs/PaintGunCore") as GameObject);
 		Prefabs.Add("splatter", Resources.Load("Prefabs/splatterDecal") as GameObject);
+		Prefabs.Add("growthBlock", Resources.Load("Prefabs/GrowthBlock") as GameObject);
 	}
 }

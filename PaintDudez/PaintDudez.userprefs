@@ -1,18 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Moor\Behaviors.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Paint\GrowSplotch.cs">
     <Files>
-      <File FileName="Assets\Scripts\PaintShooter.cs" Line="83" Column="5" />
-      <File FileName="Assets\Scripts\Moor\WorldGlobal.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PaintBlobScript.cs" Line="39" Column="4" />
-      <File FileName="Assets\Scripts\Moor\Behaviors.cs" Line="209" Column="22" />
-      <File FileName="Assets\Scripts\Moor\Main.cs" Line="75" Column="29" />
+      <File FileName="Assets\Scripts\PaintShooter.cs" Line="215" Column="83" />
+      <File FileName="Assets\Scripts\Moor\WorldGlobal.cs" Line="38" Column="65" />
+      <File FileName="Assets\Scripts\PaintBlobScript.cs" Line="26" Column="6" />
+      <File FileName="Assets\Scripts\Moor\Behaviors.cs" Line="204" Column="46" />
+      <File FileName="Assets\Scripts\Moor\Main.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Paint\RedSplotch.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Moor\Character.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Moor\Character.cs" Line="88" Column="6" />
       <File FileName="Assets\Scripts\Paint\BlueSplotch.cs" Line="31" Column="51" />
-      <File FileName="Assets\Scripts\Paint\PaintSplotch.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Paint\PaintSplotch.cs" Line="24" Column="6" />
       <File FileName="Assets\Scripts\PaintSplotchScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SphereZScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Paint\GrowSplotch.cs" Line="33" Column="129" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
