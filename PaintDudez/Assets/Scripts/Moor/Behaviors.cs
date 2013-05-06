@@ -12,9 +12,11 @@ namespace MainGameComponents
     
     public class Walk : CharacterBehavior
     {
+		
         public Walk(myMoveVars mv)
 			:this(mv, Vector3.up)
         {
+			
         }
 		public Walk(myMoveVars mv, Vector3 norm) : base(mv, norm)
         {
@@ -109,9 +111,7 @@ namespace MainGameComponents
 			dataValues.Vel = myVel;
         }
         public override void HandleCamera()
-        {
-			GameObject myPlayer = GameObject.Find("CubePlayer");
-			
+        {			
 			Transform myCamera = Camera.main.transform;
 			if(!dataValues.FirstPlayer)
 			{
@@ -213,6 +213,8 @@ namespace MainGameComponents
 			{
 				//Debug.Log("2");
 				dataValues.Vel = Vector3.Reflect(new Vector3(dataValues.Vel.x, dataValues.PrevVel.y, dataValues.Vel.z), myNormal.normalized);
+				Debug.Log(myPlayer.rigidbody);
+				//my
 			}
 			//Debug.Log("RevMag: " + dataValues.Vel.magnitude);
 			//dataValues.PrevVel = Vector3.zero;

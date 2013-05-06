@@ -72,20 +72,21 @@ namespace MainGameComponents
 		public string CurBehv;
 		public Vector3 myNormal;
 		
+		public GameObject myPlayer = null;
+		
 		public CharacterBehavior(myMoveVars mv)
 		{
 			dataValues = mv;
 			CurBehv = "none";
-            myChar = (Character)GameObject.Find("CubePlayer").GetComponent(typeof(Character));
+			myPlayer = GameObject.Find("CubePlayer");
+            myChar = (Character)myPlayer.GetComponent(typeof(Character));
+            
 			SetBehv();
 		}
 		public CharacterBehavior(myMoveVars mv, Vector3 norm)
+			:this(mv)
 		{
 			myNormal = norm;
-			dataValues = mv;
-			CurBehv = "none";
-            myChar = (Character)GameObject.Find("CubePlayer").GetComponent(typeof(Character));
-			SetBehv();
 		}
 
 		
