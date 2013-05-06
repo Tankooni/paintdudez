@@ -13,6 +13,7 @@ public class RedSplotch : PaintSplotch
 	
 	public override void EnactPaint (Collider theCollider)
 	{
+		base.EnactPaint(theCollider);
 		if(theCollider.gameObject.name == "CubePlayer")
 		{
 			theCollider.gameObject.SendMessage("GetVel", this);

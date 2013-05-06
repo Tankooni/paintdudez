@@ -3,28 +3,34 @@ using System.Collections;
 
 public class PaintBlobScript : MonoBehaviour
 {
-	paintStruct myPaint;
+	PaintStruct myPaint;
 	// Use this for initialization
 	void Start()
 	{
+		if(myPaint.paintType == typeof(CleanSplotch))
+			gameObject.rigidbody.gameObject.audio.collider.gameObject.gameObject.gameObject.tag = "Bubble";
 	}
 	
-	void setMyPaint(paintStruct paintIN)
+	
+	void setMyPaint(PaintStruct paintIN)
 	{
 		myPaint = paintIN;
+		renderer.material = myPaint.material;
+		renderer.material.color = myPaint.ballColor;
 	}
 	
 	void OnCollisionEnter(Collision col)
 	{
-		Debug.Log(col.gameObject.layer);
+//		if(col.gameObject.tag == "Paint")
+		//Debug.Log("Name: " + col.gameObject.name);
 		if(col.gameObject.layer != 8)
 		{
 			ContactPoint contact = col.contacts[0];
 			Ray ray = new Ray(contact.point + contact.normal*3, -contact.normal);
 			Debug.DrawLine(contact.point + contact.normal*3, contact.point + contact.normal*3, Color.cyan, 1000);
 			RaycastHit hit;
-			LayerMask lm = ~(1 << 8);
-			if (Physics.Raycast(ray, out hit, 1000))
+			//LayerMask lm = ~(1 << 8);
+			if (Physics.Raycast(ray, out hit, 100))
 			{
 				//Debug.DrawRay(hit.point, hit.normal, Color.red, 1000);
 
@@ -37,7 +43,7 @@ public class PaintBlobScript : MonoBehaviour
 				audio.PlayOneShot(WorldGlobal.audioClips["splat"]);
 				
 				decal.SendMessage("SetNormal", contact.normal);
-				decal.SendMessage("SetSplotch", myPaint.paintColor);
+				decal.SendMessage("SetSplotch", myPaint.paintType);
 			}
 			
 //			foreach (ContactPoint contact in col.contacts)

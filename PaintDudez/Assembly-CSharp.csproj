@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Moor\Main.cs" />
      <Compile Include="Assets\Scripts\Moor\WorldGlobal.cs" />
      <Compile Include="Assets\Scripts\Paint\BlueSplotch.cs" />
+     <Compile Include="Assets\Scripts\Paint\CleanSplotch.cs" />
      <Compile Include="Assets\Scripts\Paint\GreenSplotch.cs" />
      <Compile Include="Assets\Scripts\Paint\GrowSplotch.cs" />
      <Compile Include="Assets\Scripts\Paint\PaintSplotch.cs" />

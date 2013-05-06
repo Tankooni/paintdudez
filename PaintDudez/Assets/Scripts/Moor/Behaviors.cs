@@ -173,7 +173,7 @@ namespace MainGameComponents
 	{
 		public Hax(myMoveVars mv) : base(mv)
 		{
-			//dataValues.hForce = 15.0f;
+			dataValues.hForce = 15.0f;
 		}
 		public override void HandleInput ()
 		{
