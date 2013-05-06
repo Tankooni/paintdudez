@@ -80,7 +80,7 @@ public class PaintShooter : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		Debug.Log("Gun Vel: " + rigidbody.velocity);
+		//Debug.Log("Gun Vel: " + rigidbody.velocity);
 		if(Input.GetMouseButtonDown(1))
 		{
 			Screen.lockCursor = !(Screen.lockCursor);
