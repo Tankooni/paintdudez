@@ -207,14 +207,15 @@ namespace MainGameComponents
 			if(dataValues.PrevVel.magnitude < 20)
 			{
 				//Debug.Log("1");
-				dataValues.Vel = myNormal * 20;
+				dataValues.Vel = norm * 20;
 			}
 			else
 			{
 				//Debug.Log("2");
-				dataValues.Vel = Vector3.Reflect(new Vector3(dataValues.Vel.x, dataValues.PrevVel.y, dataValues.Vel.z), myNormal.normalized);
-				Debug.Log(myPlayer.rigidbody);
-				//my
+				//dataValues.Vel = Vector3.Reflect(new Vector3(dataValues.Vel.x, dataValues.PrevVel.y, dataValues.Vel.z), myNormal.normalized);
+				
+				// 0.99f is a cheatsy hack. It seems to stop the jump height from increasing and decreasing
+				dataValues.Vel = Vector3.Reflect(dataValues.PrevVel.normalized, norm.normalized) * (dataValues.PrevVel.magnitude + 0.981f);
 			}
 			//Debug.Log("RevMag: " + dataValues.Vel.magnitude);
 			//dataValues.PrevVel = Vector3.zero;
