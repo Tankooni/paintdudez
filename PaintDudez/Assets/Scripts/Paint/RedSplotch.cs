@@ -5,6 +5,8 @@ using MainGameComponents;
 public class RedSplotch : PaintSplotch
 {
 	public myMoveVars charVals = null;
+	float incAmount;
+	
 	public RedSplotch(GameObject go)
 		: base(go)
 	{
@@ -21,9 +23,21 @@ public class RedSplotch : PaintSplotch
 			
 			// lol :)
 			float velMag = charVals.Vel.magnitude / new Vector3(charVals.maxHSpeed, charVals.maxVUpSpeed, charVals.maxHSpeed).magnitude;
-			Debug.Log(velMag);
+			
+			//Debug.Log("velmag: " + velMag);
+			//incAmount = 0.25f;
 			
 			AudioSource.PlayClipAtPoint(WorldGlobal.audioClips["speedPaint"], theCollider.transform.position, 4.0f * velMag);
+		}
+	}
+	
+	public override void DeEnactPaint (Collider theCollider)
+	{
+		base.DeEnactPaint (theCollider);
+		
+		if (theCollider.gameObject.name == "CubePlayer")
+		{
+			//incAmount = 0;
 		}
 	}
 	
