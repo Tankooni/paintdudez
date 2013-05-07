@@ -40,6 +40,8 @@ public class Character : MonoBehaviour
         InputManager.Init();
 		
 		myController = GetComponent<CharacterController>();
+		
+		gameObject.SendMessage("SetCharValues", characterValues);
     }
 	public void OnControllerColliderHit (ControllerColliderHit hit)
 	{
@@ -80,13 +82,7 @@ public class Character : MonoBehaviour
 	}
 	
     public void Update()
-    {
-		
-		if (Input.GetMouseButtonDown(0))
-        {
-			gameObject.SendMessage("shootOBJ", characterValues);
-        }
-		
+    {		
 		//Debug.LogError("!: " + characterValues.Vel + " " + characterValues.gForce.y);
 		if(characterValues.Vel.y < 0 && Math.Abs(characterValues.Vel.y * Time.smoothDeltaTime) > 0)
 		{

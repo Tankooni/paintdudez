@@ -49,6 +49,7 @@ public class PaintShooter : MonoBehaviour
 	
 	bool isPaintGunActive = false;
 	
+	myMoveVars characterValues = null;
 	
 	// Use this for initialization
 	void Start()
@@ -116,8 +117,10 @@ public class PaintShooter : MonoBehaviour
             else
             {
                 //Add force to cube and send it flying
-                pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300);
-                pickObj = null;
+                //shootOBJ();
+				//pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300);
+				pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300 + (characterValues.Vel * 20));
+         		pickObj = null;
             }
         }
 
@@ -211,15 +214,21 @@ public class PaintShooter : MonoBehaviour
         }
     }
 	
-	void shootOBJ(myMoveVars passedVars)
+//	void shootOBJ()
+//	{
+//		Debug.Log("LALALA");
+//		if(pickObj != null)
+//		{
+//			Debug.Log(characterValues.Vel);
+//		 //Add force to cube and send it flying
+//         pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300 + (characterValues.Vel * 20));
+//         pickObj = null;
+//		}
+//	}
+	
+	void SetCharValues(myMoveVars vvkafjshfs)
 	{
-		Debug.Log("LALALA");
-		if(pickObj != null)
-		{
-		 //Add force to cube and send it flying
-         pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300 + (passedVars.Vel * 20));
-         pickObj = null;
-		}
+		characterValues = vvkafjshfs;
 	}
 
     //Waffles
