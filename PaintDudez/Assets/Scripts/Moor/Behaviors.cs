@@ -21,11 +21,14 @@ namespace MainGameComponents
 		public Walk(myMoveVars mv, Vector3 norm) : base(mv, norm)
         {
 			dataValues.hForce = 1.0f;
+			dataValues.maxHAccel = 5.0f;
         }
+		
 		public override void SetBehv()
 		{
 			CurBehv = "walk";
 		}
+		
         public override void HandleInput()
         {
 			if(dataValues.Vel.y != 0)
@@ -35,6 +38,7 @@ namespace MainGameComponents
 			
 			Vector3 myMove = Vector3.zero;
 			Vector3 myRot = Vector3.zero;
+			
             if(InputManager.GetKey("Up"))
 				myMove.x += (dataValues.hForce + dataValues.hForce*dataValues.hAccel);
 			if(InputManager.GetKey("Down"))
@@ -157,6 +161,7 @@ namespace MainGameComponents
 		public Run(myMoveVars mv) : base(mv)
 		{
 			dataValues.hForce = 3.0f ;
+			dataValues.maxHAccel = 10.0f;
 		}
 		public override void HandleInput ()
 		{
@@ -189,10 +194,19 @@ namespace MainGameComponents
 	
 	public class RedPaint : Walk
 	{
+		float incAmount;
+		
 		public RedPaint(myMoveVars mv) : base(mv)
 		{
-			dataValues.hAccel = 7.0f;
-			//dataValues.maxHSpeed = 1000.0f;
+			incAmount = 0.25f;
+			dataValues.maxHAccel = 5.0f;
+		}
+		
+		public override void HandleInput ()
+		{
+			base.HandleInput();
+			
+			dataValues.hAccel += incAmount;
 		}
 	}
 	public class BluePaint : Walk
