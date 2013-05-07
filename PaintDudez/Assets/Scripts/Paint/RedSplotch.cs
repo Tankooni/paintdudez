@@ -21,8 +21,9 @@ public class RedSplotch : PaintSplotch
 			
 			// lol :)
 			float velMag = charVals.Vel.magnitude / new Vector3(charVals.maxHSpeed, charVals.maxVUpSpeed, charVals.maxHSpeed).magnitude;
+			Debug.Log(velMag);
 			
-			AudioSource.PlayClipAtPoint(WorldGlobal.audioClips["speedPaint"], theCollider.transform.position, velMag);
+			AudioSource.PlayClipAtPoint(WorldGlobal.audioClips["speedPaint"], theCollider.transform.position, 4.0f * velMag);
 		}
 	}
 	
