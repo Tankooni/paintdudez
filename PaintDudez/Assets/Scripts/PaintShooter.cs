@@ -180,8 +180,7 @@ public class PaintShooter : MonoBehaviour
         if (pickObj != null)
         {
             //Make a new raycast to where we are pointing
-            Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
+            Ray pickRay = new Ray(paintSpawn.position, paintSpawn.TransformDirection(Vector3.left));
             //Move the object we've picked up to the previously defined ray position
             pickObj.rigidbody.MovePosition(pickRay.GetPoint(pickDist));
             if (pickHit.rigidbody && !pickHit.rigidbody.isKinematic)
@@ -229,81 +228,55 @@ public class PaintShooter : MonoBehaviour
 	void SetCharValues(myMoveVars vvkafjshfs)
 	{
 		characterValues = vvkafjshfs;
-	}
-
-    //Waffles
-	void PickObject()
-	{	
-        //Get an object and pick it up
-		if(!pickObj)
-		{
-            Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if(Physics.Raycast(pickRay, out pickHit) && pickHit.transform.tag == "Pick")
-			{
-				Debug.DrawLine(pickRay.origin, pickHit.point, Color.magenta);
-				if (pickHit.rigidbody && !pickHit.rigidbody.isKinematic)
-				{
-					pickHit.rigidbody.velocity = Vector3.zero;
-					pickHit.rigidbody.angularVelocity = Vector3.zero;
-				}
-				pickObj = pickHit.transform;
-				pickDist = Vector3.Distance(pickObj.position, Camera.main.transform.position);
-			}
-		}
-        
-        //Drop the held object
-		else
-		{
-            pickObj = null;
-		}
-	}
-	
-    //Waffles
-	void DropObject()
-	{
-		pickObj = null;
-	}
+	}	
 	
 	void ShootPaint(PaintStruct ammoType)
 	{
-//		Vector3 dir = cam.transform.forward;
-//		
-//		GameObject paint = Instantiate(blob, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity) as GameObject;
-//		//paint.SendMessage("SetPaint", );
-//		Physics.IgnoreCollision(paint.collider, collider);
-//		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
-		
-//		Vector3 dir = paintSpawn.forward;
-		GameObject paint = Instantiate(blob, paintSpawn.position, Quaternion.identity) as GameObject;
-		paint.SendMessage("setMyPaint", ammoType);
-		
-		Physics.IgnoreCollision(paint.collider, collider);
-		paint.rigidbody.AddForce(paintSpawn.TransformDirection(Vector3.left)*700);
-		
-		AudioSource tempSource = audio;
-		tempSource.pitch = 3.0f;
-		tempSource.volume = 0.5f;
-		tempSource.PlayOneShot(WorldGlobal.audioClips["shoot"]);
-		
-		//shootSfx.Play();
-		
-//		RaycastHit hit;
-//		
-//		
-//		if(Physics.Raycast(transform.position, dir, out hit, 1000))
-//		{
-//			GameObject decal;
-////			Debug.Log("Hit: " + hit.rigidbody.name);
-////			Debug.Log(cam.transform.position);
-//			Debug.DrawLine(transform.position, hit.point, Color.red, 10);
-//			
-//			decal = Instantiate(splatter, hit.point + (hit.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
-//			decal.transform.localScale = new Vector3(Random.Range(0.7f, 2.0f), Random.Range(0.7f, 2.0f), 1);
-//			decal.transform.parent = hit.rigidbody.gameObject.transform;
-//			decal.renderer.material.color = Color.blue;
-//			
-//			hit.rigidbody.collider.material = physicsMats[1];
-//			hit.rigidbody.AddForce(new Vector3(0,500,0));
-//		}
+		if(pickObj == null)
+		{
+	//		Vector3 dir = cam.transform.forward;
+	//		
+	//		GameObject paint = Instantiate(blob, transform.position + transform.TransformDirection(Vector3.forward), Quaternion.identity) as GameObject;
+	//		//paint.SendMessage("SetPaint", );
+	//		Physics.IgnoreCollision(paint.collider, collider);
+	//		paint.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward)*700);
+			
+	//		Vector3 dir = paintSpawn.forward;
+			GameObject paint = Instantiate(blob, paintSpawn.position, Quaternion.identity) as GameObject;
+			paint.SendMessage("setMyPaint", ammoType);
+			
+			Physics.IgnoreCollision(paint.collider, collider);
+			paint.rigidbody.AddForce(paintSpawn.TransformDirection(Vector3.left)*700);
+			
+			AudioSource tempSource = audio;
+			tempSource.pitch = 3.0f;
+			tempSource.volume = 0.5f;
+			tempSource.PlayOneShot(WorldGlobal.audioClips["shoot"]);
+			
+			//shootSfx.Play();
+			
+	//		RaycastHit hit;
+	//		
+	//		
+	//		if(Physics.Raycast(transform.position, dir, out hit, 1000))
+	//		{
+	//			GameObject decal;
+	////			Debug.Log("Hit: " + hit.rigidbody.name);
+	////			Debug.Log(cam.transform.position);
+	//			Debug.DrawLine(transform.position, hit.point, Color.red, 10);
+	//			
+	//			decal = Instantiate(splatter, hit.point + (hit.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
+	//			decal.transform.localScale = new Vector3(Random.Range(0.7f, 2.0f), Random.Range(0.7f, 2.0f), 1);
+	//			decal.transform.parent = hit.rigidbody.gameObject.transform;
+	//			decal.renderer.material.color = Color.blue;
+	//			
+	//			hit.rigidbody.collider.material = physicsMats[1];
+	//			hit.rigidbody.AddForce(new Vector3(0,500,0));
+	//		}
+		}
+		else
+		{
+			Debug.Log ("Dafuq bro");
+		}
 	}
 }
