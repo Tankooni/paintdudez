@@ -81,7 +81,6 @@ public class Character : MonoBehaviour
 	
     public void Update()
     {
-		
 		if (Input.GetMouseButtonDown(0))
         {
 			gameObject.SendMessage("shootOBJ", characterValues);
