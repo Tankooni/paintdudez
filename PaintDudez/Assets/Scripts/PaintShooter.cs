@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using MainGameComponents;
 
 public class paintStruct
 {
@@ -91,12 +92,6 @@ public class PaintShooter : MonoBehaviour
             if (pickObj == null)
             {
                 ShootPaint();
-            }
-            else
-            {
-                //Add force to cube and send it flying
-                pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300);
-                pickObj = null;
             }
         }
 
@@ -190,11 +185,16 @@ public class PaintShooter : MonoBehaviour
         }
     }
 	
-
-
-
-
-
+	void shootOBJ(myMoveVars passedVars)
+	{
+		Debug.Log("LALALA");
+		if(pickObj != null)
+		{
+		 //Add force to cube and send it flying
+         pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300 + (passedVars.Vel * 20));
+         pickObj = null;
+		}
+	}
 
     //Waffles
 	void PickObject()
