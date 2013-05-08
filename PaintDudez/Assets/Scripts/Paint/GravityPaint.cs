@@ -6,6 +6,8 @@ public class GravityPaint : PaintSplotch
 	GameObject myParts;
 	List<GameObject> myStuff = new List<GameObject>();
 	Ray myDir;
+	GameObject myPlayer;
+	
 	public GravityPaint(GameObject go)
 		: base(go)
 	{
@@ -36,8 +38,9 @@ public class GravityPaint : PaintSplotch
 		if(theCollider.gameObject.name == "CubePlayer")
 		{
 			theCollider.gameObject.SendMessage("SetBehavior", new object[]{"GravPaint", normal});
+			myPlayer = theCollider.gameObject;
 		}
-		else if(theCollider.rigidbody && theCollider.gameObject.tag != "Paint")
+		else if(theCollider.rigidbody && theCollider.gameObject.tag != "Paint" && theCollider.gameObject.tag != "Bubble")
 		{
 			theCollider.rigidbody.isKinematic = true;
 			theCollider.rigidbody.transform.position = (myDir.GetPoint(Vector3.Distance(theCollider.gameObject.transform.position, myObject.transform.position)));
@@ -54,9 +57,11 @@ public class GravityPaint : PaintSplotch
 
 	public override void DeEnactPaint (Collider theCollider)
 	{
-		if(theCollider.rigidbody && theCollider.gameObject.tag != "Paint")
+		myPlayer = null;
+		base.DeEnactPaint(theCollider);
+		if(theCollider.rigidbody && theCollider.gameObject.tag != "Paint" && theCollider.gameObject.tag != "Bubble")
 		{
-			base.DeEnactPaint(theCollider);
+			
 			theCollider.rigidbody.isKinematic = false;
 			myStuff.Remove(theCollider.gameObject);
 		}
@@ -73,5 +78,16 @@ public class GravityPaint : PaintSplotch
 			
 		}
 		//Debug.Log(myParts.transform.rotation);
+	}
+	
+	public override void Death()
+	{
+		if(myPlayer != null)
+			myPlayer.SendMessage("SetBehavior", new object[]{"Walk", normal});
+		for(int i = myStuff.Count-1; i >= 0; i--)
+		{
+			myStuff[i].rigidbody.isKinematic = false;
+			myStuff.Remove(myStuff[i]);
+		}
 	}
 }

@@ -94,6 +94,8 @@ public class NarrationManager : MonoBehaviour
 		}
 		doneAudio = false;
 		
+		WorldGlobal.isReadyToFire = true;
+		
 		while(!Input.GetMouseButtonDown(0))
         {
 			yield return new WaitForSeconds(0);

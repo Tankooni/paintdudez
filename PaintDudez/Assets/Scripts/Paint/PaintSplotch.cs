@@ -49,6 +49,12 @@ public abstract class PaintSplotch
 			theCollider.gameObject.SendMessage("SetBehavior", "Walk", SendMessageOptions.DontRequireReceiver);
 	}
 	
+	
+	public virtual void Death()
+	{
+		
+	}
+	
 	// Update is called once per frame
 	public virtual void Update()
 	{
