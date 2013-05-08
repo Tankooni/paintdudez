@@ -71,6 +71,8 @@ public class PaintBlobScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-	
+		//This is hacky code for right now.
+		if(myPaint.paintType == typeof(GrowSplotch))
+			gameObject.renderer.material.color = WorldGlobal.currentColor;
 	}
 }
