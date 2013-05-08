@@ -27,6 +27,8 @@ public class Character : MonoBehaviour
 	
     public void Start()
     {
+		WorldGlobal.Narrator.player = this;
+		
 		characterValues = new myMoveVars();
 		groundNormal = Vector3.zero;
         myStates.Add("walk", typeof(Walk));
@@ -43,8 +45,8 @@ public class Character : MonoBehaviour
 		myController = GetComponent<CharacterController>();
 		
 		gameObject.SendMessage("SetCharValues", characterValues);
+		WorldGlobal.Narrator.setPlayerPosition("BlackRoomSpawn");
 		
-		WorldGlobal.Narrator.player = this;
     }
 	public void OnControllerColliderHit (ControllerColliderHit hit)
 	{

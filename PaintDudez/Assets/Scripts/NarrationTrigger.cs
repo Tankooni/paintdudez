@@ -6,12 +6,13 @@ public class NarrationTrigger : MonoBehaviour
 	public string NarrationAudioClip = "";
 	bool hasBeenTriggered = false;
 	
-	void Start ()
+	void Start()
 	{
 		// If all is good, give the narration manager the appropriate audio clip, with this collider as a key
 		if (NarrationAudioClip != "" && WorldGlobal.audioClips.ContainsKey(NarrationAudioClip))
 		{
 			//Debug.Log(WorldGlobal.audioClips[NarrationAudioClip]);
+			Debug.Log(WorldGlobal.Narrator.narrationClips);
 			WorldGlobal.Narrator.narrationClips.Add(name, WorldGlobal.audioClips[NarrationAudioClip]);
 		}
 		//StartCoroutine(Do ());
@@ -45,10 +46,11 @@ public class NarrationTrigger : MonoBehaviour
 				// If all is good, play the clip at the player's position
 				if (WorldGlobal.Narrator.narrationClips.ContainsKey(name) && WorldGlobal.Narrator.narrationClips[name] != null)
 				{
+					gameObject.collider.enabled = false;
 					//AudioSource.PlayClipAtPoint(WorldGlobal.Narrator.narrationClips[name], col.gameObject.transform.position);
 					WorldGlobal.Narrator.narrativeCore.PlaySound(WorldGlobal.Narrator.narrationClips[name]);
 					//gameObject.SetActive(false);
-					gameObject.collider.enabled = false;
+					
 					StartCoroutine(ReEnableCollider(WorldGlobal.Narrator.narrationClips[name].length));
 					//Destroy(gameObject.collider);
 					//hasBeenTriggered = true;
@@ -59,9 +61,8 @@ public class NarrationTrigger : MonoBehaviour
 	
 	IEnumerator ReEnableCollider(float time)
 	{
-		print("Waiting for: " + time);
 		yield return new WaitForSeconds(time);
-		print("ReEnabling Collider");
-		gameObject.collider.enabled = true;
+		//WorldGlobal.Narrator.waitingForAudio = false;
+		//gameObject.collider.enabled = true;
 	}
 }

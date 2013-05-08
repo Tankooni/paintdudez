@@ -4,8 +4,14 @@ using System.Collections;
 public class NarrativeCore : MonoBehaviour
 {
 	public bool IsPlaying = false;
-	// Use this for initialization
+	MeshRenderer NCMr;
 	void Start()
+	{
+		NCMr = GetComponent<MeshRenderer>();
+		NCMr.enabled = false;
+	}
+	// Use this for initialization
+	void Awake()
 	{
 		WorldGlobal.Narrator.narrativeCore = this;
 	}
@@ -26,9 +32,20 @@ public class NarrativeCore : MonoBehaviour
 		return true;
 	}
 	
+	public void StopSound()
+	{
+		if(IsPlaying == true)
+		{
+			IsPlaying = false;
+			audio.Stop();
+			
+		}
+	}
+	
 	IEnumerator SoundBool(float time)
 	{
 		yield return new WaitForSeconds(time);
+		WorldGlobal.Narrator.SendMessage("AudioDone");
 		IsPlaying = false;
 	}
 }
