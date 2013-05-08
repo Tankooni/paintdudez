@@ -251,7 +251,7 @@ namespace MainGameComponents
 		public GravPaint(myMoveVars mv, Vector3 norm) : base(mv, norm)
 		{
 			dataValues.Vel = Vector3.zero;
-			dataValues.gForce = myNormal/5;
+			dataValues.gForce = -myNormal/5;
 			dataValues.hForce = .3f;
 			dataValues.inAir = true;
 		}

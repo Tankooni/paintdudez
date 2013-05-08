@@ -223,7 +223,8 @@ public class PaintShooter : MonoBehaviour
 
     void toggleObject()
     {
-        Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray pickRay = new Ray(paintSpawn.position, paintSpawn.TransformDirection(Vector3.left));
         if (!pickObj)
         {
             if (Physics.Raycast(pickRay, out pickHit, 2.5f) && pickHit.transform.tag == "Pick")
