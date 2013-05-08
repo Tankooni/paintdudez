@@ -59,7 +59,8 @@ public class PaintShooter : MonoBehaviour
 		ammoType[0] = new PaintStruct(typeof(BlueSplotch), Color.blue, WorldGlobal.Materials["default"]);
 		ammoType[1] = new PaintStruct(typeof(GreenSplotch), Color.green, WorldGlobal.Materials["default"]);
 		ammoType[2] = new PaintStruct(typeof(RedSplotch), Color.red, WorldGlobal.Materials["default"]);
-		ammoType[3] = new PaintStruct(typeof(GrowSplotch), Color.black, WorldGlobal.Materials["default"]);
+		ammoType[3] = new PaintStruct(typeof(GrowSplotch), WorldGlobal.currentColor, WorldGlobal.Materials["default"]);
+		ammoType[4] = new PaintStruct(typeof(GravityPaint), new Color(0.211f, 0, 0.16f), WorldGlobal.Materials["default"]);
 		
 		cleanAmmo = new PaintStruct(typeof(CleanSplotch), new Color(0,0,0,0), WorldGlobal.Materials["bubble"]);
 		
@@ -81,7 +82,7 @@ public class PaintShooter : MonoBehaviour
 		coreObject = WorldGlobal.Prefabs["gunCore"];
 		coreInstance = Instantiate(coreObject, floatyBall.position, floatyBall.rotation) as GameObject;
 		coreInstance.transform.parent = floatyBall;
-		coreInstance.renderer.material.color = Color.blue;
+		coreInstance.renderer.material.color = currentActivePaint.ballColor;
 	}
 	
 	
@@ -89,6 +90,10 @@ public class PaintShooter : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		//This is hacky code for right now.
+		if(currentActivePaint.paintType == typeof(GrowSplotch))
+			coreInstance.renderer.material.color = WorldGlobal.currentColor;
+		
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
 			Screen.lockCursor = !(Screen.lockCursor);	
@@ -147,6 +152,11 @@ public class PaintShooter : MonoBehaviour
 				currentActivePaint = ammoType[3];
 				coreInstance.renderer.material.color = currentActivePaint.ballColor;
 			}
+	    }
+		else if(Input.GetKeyDown (KeyCode.Alpha5))
+	    {
+				currentActivePaint = ammoType[4];
+				coreInstance.renderer.material.color = currentActivePaint.ballColor;
 	    }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -213,18 +223,6 @@ public class PaintShooter : MonoBehaviour
         }
     }
 	
-//	void shootOBJ()
-//	{
-//		Debug.Log("LALALA");
-//		if(pickObj != null)
-//		{
-//			Debug.Log(characterValues.Vel);
-//		 //Add force to cube and send it flying
-//         pickObj.rigidbody.AddForce(cam.transform.TransformDirection(Vector3.forward) * 300 + (characterValues.Vel * 20));
-//         pickObj = null;
-//		}
-//	}
-	
 	void SetCharValues(myMoveVars vvkafjshfs)
 	{
 		characterValues = vvkafjshfs;
@@ -273,10 +271,6 @@ public class PaintShooter : MonoBehaviour
 	//			hit.rigidbody.collider.material = physicsMats[1];
 	//			hit.rigidbody.AddForce(new Vector3(0,500,0));
 	//		}
-		}
-		else
-		{
-			Debug.Log ("Dafuq bro");
 		}
 	}
 }

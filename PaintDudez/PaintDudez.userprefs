@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Moor\Character.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Paint\GravityPaint.cs">
     <Files>
-      <File FileName="Assets\Scripts\Moor\Behaviors.cs" Line="214" Column="16" />
-      <File FileName="Assets\Scripts\Moor\Character.cs" Line="90" Column="38" />
-      <File FileName="Assets\Scripts\PaintShooter.cs" Line="263" Column="7" />
+      <File FileName="Assets\Scripts\Paint\GravityPaint.cs" Line="10" Column="5" />
+      <File FileName="Assets\Scripts\Paint\BlueSplotch.cs" Line="8" Column="3" />
+      <File FileName="Assets\Scripts\Paint\GrowSplotch.cs" Line="25" Column="2" />
+      <File FileName="Assets\Scripts\PaintShooter.cs" Line="63" Column="82" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

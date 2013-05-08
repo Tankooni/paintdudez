@@ -104,7 +104,7 @@ public class Character : MonoBehaviour
 		
 		characterValues.hAccel -= Time.smoothDeltaTime * 3;
 		characterValues.hAccel = Mathf.Clamp(characterValues.hAccel, 0.0f, characterValues.maxHAccel);
-		Debug.Log(characterValues.hAccel + "    " + characterValues.maxHAccel);
+		//Debug.Log(characterValues.hAccel + "    " + characterValues.maxHAccel);
 		
 		myBehavior.HandleUpdate();
 		myFlags = myController.Move(myBehavior.GetVel() * Time.smoothDeltaTime);
