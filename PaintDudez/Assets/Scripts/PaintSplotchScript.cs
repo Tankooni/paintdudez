@@ -9,20 +9,22 @@ public class PaintSplotchScript : MonoBehaviour
 	Vector3 normal;
 	PaintSplotch paint = null;
 	GameObject myCollider;
-	GameObject myColScalar;
+	GameObject myColScalar = null;
 	
-	// Use this for initialization
 	void Start()
 	{
 		mf = GetComponent<MeshFilter>();
 		myColScalar = transform.Find("Bananas").gameObject;
 		myCollider = myColScalar.transform.FindChild("Cooler").gameObject;
+		myColScalar.transform.localScale = new Vector3(1, .5f, 1);
+		myCollider.transform.localPosition = new Vector3(0,gameObject.transform.localScale.y/2,0);
+		
 		if(paint == null)
 			paint = new BlueSplotch(gameObject);
 		paint.normal = normal;
+		paint.ScalarObject = myColScalar;
 		//myCollider.transform.localScale = gameObject.transform.localScale;
-		myColScalar.transform.localScale = new Vector3(1, .5f, 1);
-		myCollider.transform.localPosition = new Vector3(0,gameObject.transform.localScale.y/2,0);
+		
 		
 //		myCollider.transform.localRotation = gameObject.transform.localRotation;
 	}

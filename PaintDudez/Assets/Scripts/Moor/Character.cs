@@ -34,6 +34,7 @@ public class Character : MonoBehaviour
 		myStates.Add("hax", typeof(Hax));
 		myStates.Add("RedPaint", typeof(RedPaint));
 		myStates.Add("BluePaint", typeof(BluePaint));
+		myStates.Add("GravPaint", typeof(GravPaint));
 		
 		SetBehavior("");
         //myStates.Add("run", typeof(Run));
