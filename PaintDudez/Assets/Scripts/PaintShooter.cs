@@ -73,14 +73,14 @@ public class PaintShooter : MonoBehaviour
 		cam = Camera.main;
 //		blob = Resources.Load("Prefabs/paintBlob") as GameObject;
 //		ball = Resources.Load("Prefabs/SphereZ") as GameObject;
-		blob = WorldGlobal.Prefabs["blob"];
-		ball = WorldGlobal.Prefabs["ball"];
+		blob = WorldGlobal.Prefabs["paintBlob"];
+		ball = WorldGlobal.Prefabs["SphereZ"];
 
 		painGun = cam.transform.Find("PaintGun").gameObject;
 		
 		floatyBall = painGun.transform.Find("b_gun_root/b_gun_ball");
 		paintSpawn = painGun.transform.Find("b_gun_root/b_gun_Shooter");
-		coreObject = WorldGlobal.Prefabs["gunCore"];
+		coreObject = WorldGlobal.Prefabs["PaintGunCore"];
 		coreInstance = Instantiate(coreObject, floatyBall.position, floatyBall.rotation) as GameObject;
 		coreInstance.transform.parent = floatyBall;
 		coreInstance.renderer.material.color = currentActivePaint.ballColor;
@@ -92,7 +92,7 @@ public class PaintShooter : MonoBehaviour
 		flashLight.light.spotAngle = 40;
 		flashLight.light.intensity = 0.5f;
 		flashLight.light.enabled = false;
-		flashLight.transform.position = paintSpawn.position;
+		flashLight.transform.position = paintSpawn.position + Vector3.Scale(paintSpawn.TransformDirection(Vector3.left),paintSpawn.position/6);
 		flashLight.transform.rotation = Quaternion.LookRotation(paintSpawn.TransformDirection(Vector3.left));
 		flashLight.transform.parent = paintSpawn;
 		

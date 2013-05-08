@@ -52,11 +52,11 @@ public class WorldGlobal : MonoBehaviour
 //		audioClips.Add("grow", Resources.Load("Sounds/growPaint") as AudioClip);
 //		
 		Prefabs = new Dictionary<string, GameObject>();
-		Prefabs.Add("blob", Resources.Load("Prefabs/paintBlob") as GameObject);
-		Prefabs.Add("ball", Resources.Load("Prefabs/SphereZ") as GameObject);
-		Prefabs.Add("gunCore", Resources.Load("Prefabs/PaintGunCore") as GameObject);
-		Prefabs.Add("splatter", Resources.Load("Prefabs/splatterDecal") as GameObject);
-		Prefabs.Add("growthBlock", Resources.Load("Prefabs/GrowthBlock") as GameObject);
+		os = Resources.LoadAll("Prefabs");
+		foreach(UnityEngine.Object o in  os)
+		{
+			Prefabs.Add((o as GameObject).name, o as GameObject);
+		}
 		
 		Materials = new Dictionary<string, Material>();
 		Materials.Add("bubble", Resources.Load("Materials/SoapBubble") as Material);
