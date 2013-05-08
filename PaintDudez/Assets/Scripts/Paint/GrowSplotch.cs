@@ -6,6 +6,7 @@ public class GrowSplotch : PaintSplotch
 	GameObject myBlockHolder = null;
 	GameObject myBlock = null;
 	
+	
 	public GrowSplotch(GameObject go)
 		: base(go)
 	{
@@ -13,7 +14,7 @@ public class GrowSplotch : PaintSplotch
 		myBlockHolder = MonoBehaviour.Instantiate(WorldGlobal.Prefabs["growthBlock"], go.transform.position, go.transform.rotation) as GameObject;
 		myBlock = myBlockHolder.transform.FindChild("Cube").gameObject;
 		myBlock.name = "GrowBlock";
-		myBlock.renderer.material.color = new Color(Random.value, Random.value, Random.value, .9f);
+		myBlock.renderer.material.color = WorldGlobal.currentColor;
 		
 		myBlockHolder.transform.parent = go.transform;
 		//myBlock.transform.parent = go.transform;
@@ -33,8 +34,9 @@ public class GrowSplotch : PaintSplotch
 	// Update is called once per frame
 	public override void Update()
 	{
-		myBlock.renderer.material.color = new Color(Random.value, Random.value, Random.value, 0.9f);
-		myBlockHolder.transform.localScale = new Vector3(myBlockHolder.transform.localScale.x, myBlockHolder.transform.localScale.y + 1.01f, myBlockHolder.transform.localScale.z);
+		myBlock.renderer.material.color = WorldGlobal.currentColor;
+		if(myBlockHolder.transform.localScale.y < 35)
+			myBlockHolder.transform.localScale = new Vector3(myBlockHolder.transform.localScale.x, myBlockHolder.transform.localScale.y + 1.01f, myBlockHolder.transform.localScale.z);
 		//Debug.Log("I'M GROWING!");
 		//if(myCollide) myCollide.rigidbody.velocity = Vector3.zero;
 	}
