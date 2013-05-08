@@ -58,11 +58,11 @@ public class PaintShooter : MonoBehaviour
 		//Blue paint
 		//ammoType.Add(new paintStruct(typeof(BlueSplotch), Color.blue));
 		ammoType[0] = new PaintStruct(typeof(BlueSplotch), Color.blue, WorldGlobal.Materials["default"]);
-		ammoType[1] = new PaintStruct(typeof(GreenSplotch), Color.green, WorldGlobal.Materials["default"]);
-		ammoType[2] = new PaintStruct(typeof(RedSplotch), Color.red, WorldGlobal.Materials["default"]);
-		ammoType[3] = new PaintStruct(typeof(GrowSplotch), WorldGlobal.currentColor, WorldGlobal.Materials["default"]);
-		ammoType[4] = new PaintStruct(typeof(GravityPaint), new Color(0.211f, 0, 0.16f), WorldGlobal.Materials["default"]);
-		ammoType[5] = new PaintStruct(typeof(BananaSplotch), Color.yellow, WorldGlobal.Materials["default"]);
+		//ammoType[1] = new PaintStruct(typeof(GreenSplotch), Color.green, WorldGlobal.Materials["default"]);
+		//ammoType[2] = new PaintStruct(typeof(RedSplotch), Color.red, WorldGlobal.Materials["default"]);
+		//ammoType[3] = new PaintStruct(typeof(GrowSplotch), WorldGlobal.currentColor, WorldGlobal.Materials["default"]);
+		//ammoType[4] = new PaintStruct(typeof(GravityPaint), new Color(0.211f, 0, 0.16f), WorldGlobal.Materials["default"]);
+		//ammoType[5] = new PaintStruct(typeof(BananaSplotch), Color.yellow, WorldGlobal.Materials["default"]);
 		
 		cleanAmmo = new PaintStruct(typeof(CleanSplotch), new Color(0,0,0,0), WorldGlobal.Materials["bubble"]);
 		
@@ -148,18 +148,27 @@ public class PaintShooter : MonoBehaviour
 		
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 	    {
-			currentActivePaint = ammoType[0];
-			coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            if (ammoType[0] != null)
+            {
+                currentActivePaint = ammoType[0];
+                coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            }
 	    }
 	    else if(Input.GetKeyDown(KeyCode.Alpha2))
 	    {
-			currentActivePaint = ammoType[1];
-			coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            if (ammoType[1] != null)
+            {
+                currentActivePaint = ammoType[1];
+                coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            }
 	    }
 	    else if(Input.GetKeyDown (KeyCode.Alpha3))
 	    {
-			currentActivePaint = ammoType[2];
-			coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            if (ammoType[2] != null)
+            {
+                currentActivePaint = ammoType[2];
+                coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            }
 	    }
 		else if(Input.GetKeyDown (KeyCode.Alpha4))
 	    {
@@ -171,13 +180,19 @@ public class PaintShooter : MonoBehaviour
 	    }
 		else if(Input.GetKeyDown (KeyCode.Alpha5))
 	    {
-				currentActivePaint = ammoType[4];
-				coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            if (ammoType[4] != null)
+            {
+                currentActivePaint = ammoType[4];
+                coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            }
 	    }
 		else if(Input.GetKeyDown (KeyCode.Alpha6))
 	    {
-				currentActivePaint = ammoType[5];
-				coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            if (ammoType[5] != null)
+            {
+                currentActivePaint = ammoType[5];
+                coreInstance.renderer.material.color = currentActivePaint.ballColor;
+            }
 	    }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -241,6 +256,19 @@ public class PaintShooter : MonoBehaviour
         else
         {
             pickObj = null;
+        }
+    }
+
+    void addPaint(PaintStruct paintIN)
+    {
+        for (int x = 0; x <= ammoType.Length; x++)
+        {
+            if(ammoType[x] == null)
+            {
+                ammoType[x] = paintIN;
+                currentActivePaint = ammoType[x];
+                break;
+            }
         }
     }
 	

@@ -21,7 +21,7 @@ public class PaintBlobScript : MonoBehaviour
 	
 	void OnCollisionEnter(Collision col)
 	{
-//		if(col.gameObject.tag == "Paint")
+        //if(col.gameObject.tag == "Paint")
 		//Debug.Log("Name: " + col.gameObject.name);
 		if(col.gameObject.name == "splatterDecal")
 		{
