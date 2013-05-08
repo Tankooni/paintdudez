@@ -20,6 +20,7 @@ namespace MainGameComponents
         }
 		public Walk(myMoveVars mv, Vector3 norm) : base(mv, norm)
         {
+			CurBehv = "Walk";
 			dataValues.hForce = 1.0f;
 			dataValues.maxHAccel = 5.0f;
 			dataValues.gForce = new Vector3(0.0f, 0.6333f, 0.0f);

@@ -61,7 +61,8 @@ public class WorldGlobal : MonoBehaviour
 		Materials = new Dictionary<string, Material>();
 		Materials.Add("bubble", Resources.Load("Materials/SoapBubble") as Material);
 		Materials.Add("default", Resources.Load("Materials/lambert1") as Material);
-		Narrator = new NarrationManager();
+		WorldGlobal.Narrator = GetComponent<NarrationManager>();
+//		Narrator = new NarrationManager();
 	}
 
 	void ChangeColor()
