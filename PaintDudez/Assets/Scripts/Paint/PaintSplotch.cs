@@ -32,7 +32,7 @@ public abstract class PaintSplotch
 		//Debug.Log(theCollider.gameObject.tag);
 		if(theCollider.gameObject.tag == "Bubble")
 		{
-			AudioSource.PlayClipAtPoint(WorldGlobal.audioClips["clean"], theCollider.transform.position, 8.0f);
+			AudioSource.PlayClipAtPoint(WorldGlobal.audioClips["erasePaint"], theCollider.transform.position, 8.0f);
 			
 			GameObject.Destroy(theCollider.gameObject);
 			GameObject.Destroy(myObject);
