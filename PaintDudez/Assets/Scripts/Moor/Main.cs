@@ -158,6 +158,40 @@ namespace MainGameComponents
                 return Input.GetKey(KeyCode.Escape);
 			return false;
 		}
+		static public bool GetKeyDown(string _KeyName)
+		{
+			if(InputLayout.ContainsKey(_KeyName))
+				return Input.GetKeyDown((KeyCode)InputLayout[_KeyName]);
+            //Unchangeables - Locked in
+            if (_KeyName == "Up")
+                return Input.GetKeyDown(KeyCode.UpArrow);
+            if (_KeyName == "Down")
+                return Input.GetKeyDown(KeyCode.DownArrow);
+            if (_KeyName == "Left")
+                return Input.GetKeyDown(KeyCode.LeftArrow);
+            if (_KeyName == "Right")
+                return Input.GetKeyDown(KeyCode.RightArrow);
+            if(_KeyName == "Back")
+                return Input.GetKeyDown(KeyCode.Escape);
+			return false;
+		}
+		static public bool GetKeyUp(string _KeyName)
+		{
+			if(InputLayout.ContainsKey(_KeyName))
+				return Input.GetKeyUp((KeyCode)InputLayout[_KeyName]);
+            //Unchangeables - Locked in
+            if (_KeyName == "Up")
+                return Input.GetKeyUp(KeyCode.UpArrow);
+            if (_KeyName == "Down")
+                return Input.GetKeyUp(KeyCode.DownArrow);
+            if (_KeyName == "Left")
+                return Input.GetKeyUp(KeyCode.LeftArrow);
+            if (_KeyName == "Right")
+                return Input.GetKeyUp(KeyCode.RightArrow);
+            if(_KeyName == "Back")
+                return Input.GetKeyUp(KeyCode.Escape);
+			return false;
+		}
 		/// <summary>
 		/// Will erase the current key bindings and reset them to their defaults
 		/// </summary>
@@ -169,7 +203,7 @@ namespace MainGameComponents
             InputLayout.Add("Right" , KeyCode.D.GetHashCode());
             InputLayout.Add("Left" , KeyCode.A.GetHashCode());
             InputLayout.Add("Mod1" , KeyCode.LeftControl.GetHashCode());
-            InputLayout.Add("Mod2" , KeyCode.LeftAlt.GetHashCode());
+            InputLayout.Add("Mod2" , KeyCode.CapsLock.GetHashCode());
             InputLayout.Add("Mod3" , KeyCode.LeftShift.GetHashCode());
             InputLayout.Add("Back" , KeyCode.Escape.GetHashCode());
             InputLayout.Add("Behv0" , KeyCode.E.GetHashCode());

@@ -13,7 +13,7 @@ public class NarrativeCore : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-	
+		//renderer.material.color = WorldGlobal.currentColor;
 	}
 	
 	public bool PlaySound(AudioClip sound)

@@ -44,6 +44,7 @@ public class PaintShooter : MonoBehaviour
 	GameObject coreObject = null;
 	public GameObject coreInstance = null;
 	GameObject painGun = null;
+	GameObject flashLight = null;
 	
 	PaintStruct currentActivePaint;
 	
@@ -83,14 +84,25 @@ public class PaintShooter : MonoBehaviour
 		coreInstance = Instantiate(coreObject, floatyBall.position, floatyBall.rotation) as GameObject;
 		coreInstance.transform.parent = floatyBall;
 		coreInstance.renderer.material.color = currentActivePaint.ballColor;
+		
+		flashLight = new GameObject("Light");
+		flashLight.AddComponent<Light>();
+		flashLight.light.type = LightType.Spot;
+		flashLight.light.range = 100;
+		flashLight.light.spotAngle = 40;
+		flashLight.light.intensity = 0.5f;
+		flashLight.light.enabled = false;
+		flashLight.transform.position = paintSpawn.position;
+		flashLight.transform.rotation = Quaternion.LookRotation(paintSpawn.TransformDirection(Vector3.left));
+		flashLight.transform.parent = paintSpawn;
+		
 	}
 	
 	
 	
 	// Update is called once per frame
 	void Update()
-	{
-		//This is hacky code for right now.
+	{	
 		if(currentActivePaint.paintType == typeof(GrowSplotch))
 			coreInstance.renderer.material.color = WorldGlobal.currentColor;
 		
@@ -98,6 +110,9 @@ public class PaintShooter : MonoBehaviour
 		{
 			Screen.lockCursor = !(Screen.lockCursor);	
 		}
+		
+		if(Input.GetKeyDown(KeyCode.F))
+			flashLight.light.enabled = !flashLight.light.enabled;
 		
 		//Debug.Log("Gun Vel: " + rigidbody.velocity);
 		if(Input.GetMouseButtonDown(1))

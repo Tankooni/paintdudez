@@ -22,6 +22,7 @@ namespace MainGameComponents
         {
 			dataValues.hForce = 1.0f;
 			dataValues.maxHAccel = 5.0f;
+			dataValues.gForce = new Vector3(0.0f, 0.6333f, 0.0f);
         }
 		
 		public override void SetBehv()
@@ -62,13 +63,13 @@ namespace MainGameComponents
 				}
 			}
 			
-			if(myChar.getBehv()  == "walk")
-			{
-				if(InputManager.GetKey ("Mod3"))
-					myChar.SetBehavior("run");
-//				if(InputManager.GetKey ("Mod2"))
-//					myChar.SetBehavior("hax");
-			}
+//			if(myChar.getBehv()  == "walk")
+//			{
+//				if(InputManager.GetKey ("Mod3"))
+//					myChar.SetBehavior("run");
+////				if(InputManager.GetKey ("Mod2"))
+////					myChar.SetBehavior("hax");
+//			}
 			myChar.transform.rotation = Quaternion.Euler(myChar.transform.rotation.eulerAngles + myRot);
 			
 			Vector3 myTransform = myChar.transform.TransformDirection(Vector3.forward);
@@ -218,27 +219,49 @@ namespace MainGameComponents
 //			Debug.Log("PrevVel: " + dataValues.PrevVel);
 			//Debug.Log("VelMag: " + dataValues.PrevVel.magnitude);
 			//Debug.Log("RevMag: " + dataValues.PrevVel.magnitude);
-			if(dataValues.PrevVel.magnitude < 20)
+			if(!InputManager.GetKey("Mod2"))
 			{
-				dataValues.Vel = norm * 20;
-			}
-			else
-			{
-				//Debug.Log("2");
-				//dataValues.Vel = Vector3.Reflect(new Vector3(dataValues.Vel.x, dataValues.PrevVel.y, dataValues.Vel.z), myNormal.normalized);
+				if(dataValues.PrevVel.magnitude < 20)
+				{
+					dataValues.Vel = norm * 20;
+				}
+				else
+				{
+					//Debug.Log("2");
+					//dataValues.Vel = Vector3.Reflect(new Vector3(dataValues.Vel.x, dataValues.PrevVel.y, dataValues.Vel.z), myNormal.normalized);
+					
+					// 0.99f is a cheatsy hack. It seems to stop the jump height from increasing and decreasing
+					dataValues.Vel = Vector3.Reflect(dataValues.PrevVel.normalized, norm.normalized) * (dataValues.PrevVel.magnitude + 0.981f);
+				}
 				
-				// 0.99f is a cheatsy hack. It seems to stop the jump height from increasing and decreasing
-				dataValues.Vel = Vector3.Reflect(dataValues.PrevVel.normalized, norm.normalized) * (dataValues.PrevVel.magnitude + 0.981f);
+				if(InputManager.GetKey("Mod3"))
+					dataValues.Vel += dataValues.jForce*myNormal/2;
+				
+				dataValues.inAir = true;
 			}
-			
-			if(InputManager.GetKey("Behv1"))
-			{
-				dataValues.Vel += dataValues.jForce*myNormal/2;
-			}
-			
-			dataValues.inAir = true;
 			//Debug.Log("RevMag: " + dataValues.Vel.magnitude);
 			dataValues.PrevVel = Vector3.zero;
+		}
+	}
+	
+	public class GravPaint : Walk
+	{
+		float incAmount;
+		
+		public GravPaint(myMoveVars mv, Vector3 norm) : base(mv, norm)
+		{
+			dataValues.Vel = Vector3.zero;
+			dataValues.gForce = myNormal/5;
+			dataValues.hForce = .3f;
+			dataValues.inAir = true;
+		}
+		
+		public override void HandleInput()
+		{
+			dataValues.inAir = true;
+			base.HandleInput();
+			if(InputManager.GetKeyDown("Mod3"))
+				dataValues.gForce = -dataValues.gForce;
 		}
 	}
 }

@@ -6,6 +6,21 @@ public abstract class PaintSplotch
 	public Color color = Color.white;
 	public Vector3 normal;
 	protected GameObject myObject;
+	protected GameObject myScalarObject;
+	protected float colliderScale = 1;
+	
+	public GameObject ScalarObject
+	{
+		get
+		{
+			return myScalarObject;
+		}
+		set
+		{
+			myScalarObject = value;
+			myScalarObject.transform.localScale = new Vector3(myScalarObject.transform.localScale.x, myScalarObject.transform.localScale.y * colliderScale, myScalarObject.transform.localScale.z);
+		}
+	}
 	
 	public PaintSplotch(GameObject go)
 	{
@@ -13,7 +28,7 @@ public abstract class PaintSplotch
 	}
 	
 	public virtual void EnactPaint(Collider theCollider)
-	{
+	{		
 		//Debug.Log(theCollider.gameObject.tag);
 		if(theCollider.gameObject.tag == "Bubble")
 		{
