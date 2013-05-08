@@ -46,10 +46,10 @@ public class PaintSplotchScript : MonoBehaviour
 			paint.DeEnactPaint(col);
 	}
 	
-	void OnDrawGizmos()
-	{
-		//Gizmos.DrawWireCube(myCollider.transform.position, myCollider.transform.localScale);
-	}
+//	void OnDrawGizmos()
+//	{
+//		//Gizmos.DrawWireCube(myCollider.transform.position, myCollider.transform.localScale);
+//	}
 	
 	void Update()
 	{
@@ -60,6 +60,11 @@ public class PaintSplotchScript : MonoBehaviour
 //			
 //			Debug.DrawLine(transform.localToWorldMatrix.MultiplyPoint3x4(poin), poin+Vector3.one, Color.blue);
 //		}
+	}
+	
+	void OnDestroy()
+	{
+		paint.Death();
 	}
 	
 	void SetNormal(Vector3 vec)

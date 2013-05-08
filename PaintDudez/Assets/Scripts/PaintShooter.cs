@@ -56,13 +56,12 @@ public class PaintShooter : MonoBehaviour
 	void Start()
 	{
 		WorldGlobal.Narrator.shootsNLadders = this;
-		//Blue paint
-		//ammoType.Add(new paintStruct(typeof(BlueSplotch), Color.blue));
+
 		ammoType[0] = new PaintStruct(typeof(BlueSplotch), Color.blue, WorldGlobal.Materials["default"]);
 		//ammoType[1] = new PaintStruct(typeof(GreenSplotch), Color.green, WorldGlobal.Materials["default"]);
 		//ammoType[2] = new PaintStruct(typeof(RedSplotch), Color.red, WorldGlobal.Materials["default"]);
 		//ammoType[3] = new PaintStruct(typeof(GrowSplotch), WorldGlobal.currentColor, WorldGlobal.Materials["default"]);
-		//ammoType[4] = new PaintStruct(typeof(GravityPaint), new Color(0.211f, 0, 0.16f), WorldGlobal.Materials["default"]);
+		ammoType[4] = new PaintStruct(typeof(GravityPaint), new Color(0.211f, 0, 0.16f), WorldGlobal.Materials["default"]);
 		//ammoType[5] = new PaintStruct(typeof(BananaSplotch), Color.yellow, WorldGlobal.Materials["default"]);
 		
 		cleanAmmo = new PaintStruct(typeof(CleanSplotch), new Color(0,0,0,0), WorldGlobal.Materials["bubble"]);
@@ -117,7 +116,7 @@ public class PaintShooter : MonoBehaviour
 			flashLight.light.enabled = !flashLight.light.enabled;
 		
 		//Debug.Log("Gun Vel: " + rigidbody.velocity);
-		if(Input.GetMouseButtonDown(1))
+		if(Input.GetMouseButtonDown(1) && WorldGlobal.isReadyToFire)
 		{
             if (pickObj == null)
             {
@@ -130,7 +129,7 @@ public class PaintShooter : MonoBehaviour
                 pickObj = null;
             }
 		}
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && WorldGlobal.isReadyToFire)
         {
             if (pickObj == null)
             {

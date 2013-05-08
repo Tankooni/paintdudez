@@ -11,9 +11,12 @@ public class WorldGlobal : MonoBehaviour
 	public static Dictionary<string, Material> Materials;
 	public static Color currentColor;
 	public static NarrationManager Narrator;
+	public static KillZ killZ;
 	Color newColor;
 	Color oldColor;
 	float percentage = 0;
+	
+	public static bool isReadyToFire = false;
 	
 	void Awake()
 	{
@@ -62,6 +65,7 @@ public class WorldGlobal : MonoBehaviour
 		Materials.Add("bubble", Resources.Load("Materials/SoapBubble") as Material);
 		Materials.Add("default", Resources.Load("Materials/lambert1") as Material);
 		WorldGlobal.Narrator = GetComponent<NarrationManager>();
+		//WorldGlobal.killZ = GetComponent<KillZ>();
 //		Narrator = new NarrationManager();
 	}
 

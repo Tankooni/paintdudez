@@ -25,6 +25,8 @@ public class Character : MonoBehaviour
 	[NonSerialized]
 	public myMoveVars characterValues;
 	
+	public Vector3 lastGoodPos = Vector3.zero;
+	
     public void Start()
     {
 		WorldGlobal.Narrator.player = this;
@@ -46,7 +48,6 @@ public class Character : MonoBehaviour
 		
 		gameObject.SendMessage("SetCharValues", characterValues);
 		WorldGlobal.Narrator.setPlayerPosition("BlackRoomSpawn");
-		
     }
 	public void OnControllerColliderHit (ControllerColliderHit hit)
 	{
@@ -101,6 +102,8 @@ public class Character : MonoBehaviour
 //				Vector3 temp = characterValues.Vel;
 //				temp.y -= hit.distance;
 //				characterValues.PrevVel = temp;
+				
+				
 			}
 //			else
 //				characterValues.PrevVel = Vector3.zero;
@@ -123,6 +126,8 @@ public class Character : MonoBehaviour
 		{
 			characterValues.inAir = false;
 			characterValues.Vel.y = 0;
+			Debug.Log("SetLastPos");
+			lastGoodPos = transform.position;
 		}
 		if((myFlags & CollisionFlags.CollidedAbove) == (CollisionFlags.Above))
 		{
@@ -135,5 +140,13 @@ public class Character : MonoBehaviour
 	public void GetVel(RedSplotch rs)
 	{
 		rs.charVals = characterValues;
+	}
+	
+	public void killedZ()
+	{
+		Debug.Log("DEATHER");
+		characterValues.PrevVel = Vector3.zero;
+		characterValues.Vel = Vector3.zero;
+		transform.position = lastGoodPos;
 	}
 }
