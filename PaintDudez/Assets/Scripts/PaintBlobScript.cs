@@ -26,8 +26,8 @@ public class PaintBlobScript : MonoBehaviour
 		if(col.gameObject.layer != 8)
 		{
 			ContactPoint contact = col.contacts[0];
-			Ray ray = new Ray(contact.point + contact.normal*3, -contact.normal);
-			Debug.DrawLine(contact.point + contact.normal*3, contact.point + contact.normal*3, Color.cyan, 1000);
+			Ray ray = new Ray(contact.point + contact.normal, -contact.normal);
+			Debug.DrawLine(contact.point + contact.normal, contact.point + contact.normal*3, Color.cyan, 1000);
 			RaycastHit hit;
 			//LayerMask lm = ~(1 << 8);
 			if (Physics.Raycast(ray, out hit, 100))
