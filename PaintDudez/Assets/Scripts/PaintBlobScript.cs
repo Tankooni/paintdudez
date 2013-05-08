@@ -23,6 +23,10 @@ public class PaintBlobScript : MonoBehaviour
 	{
 //		if(col.gameObject.tag == "Paint")
 		//Debug.Log("Name: " + col.gameObject.name);
+		if(col.gameObject.name == "splatterDecal")
+		{
+			Debug.Log(col.gameObject);
+		}
 		if(col.gameObject.layer != 8)
 		{
 			ContactPoint contact = col.contacts[0];
@@ -35,7 +39,8 @@ public class PaintBlobScript : MonoBehaviour
 				//Debug.DrawRay(hit.point, hit.normal, Color.red, 1000);
 
 				GameObject decal = Instantiate(WorldGlobal.Prefabs["splatter"], hit.point + (contact.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, contact.normal)) as GameObject;
-				decal.transform.localScale = new Vector3(Random.Range(1.0f, 4.0f), decal.transform.localScale.y, Random.Range(1.0f, 4.0f));
+				//decal.transform.localScale = new Vector3(Random.Range(1.0f, 4.0f), decal.transform.localScale.y, Random.Range(1.0f, 4.0f));
+				decal.transform.localScale = new Vector3(2, decal.transform.localScale.y, 2);
 				//decal.transform.parent = contact.otherCollider.transform;
 				
 				AudioSource tempSource = audio;

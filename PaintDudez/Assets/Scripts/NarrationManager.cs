@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class NarrationManager
 {
 	public Dictionary<string, AudioClip> narrationClips;
-	Character player;
+	public Character player;
+	public NarrativeCore narrativeCore;
 	
 	// TODO: Implement this if necessary
 	Queue<AudioClip> audioQueue;
@@ -16,8 +17,13 @@ public class NarrationManager
 		audioQueue = new Queue<AudioClip>();
 	}
 	
-	void Update ()
+	public void QueueSound(AudioClip audio)
 	{
+		audioQueue.Enqueue(audio);
+	}
 	
+	public void Update()
+	{
+		Debug.Log(narrativeCore + " " + player);
 	}
 }

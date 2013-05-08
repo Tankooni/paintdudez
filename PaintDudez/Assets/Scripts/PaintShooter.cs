@@ -42,7 +42,7 @@ public class PaintShooter : MonoBehaviour
 	Transform floatyBall = null;
 	Transform paintSpawn = null;
 	GameObject coreObject = null;
-	GameObject coreInstance = null;
+	public GameObject coreInstance = null;
 	GameObject painGun = null;
 	
 	PaintStruct currentActivePaint;

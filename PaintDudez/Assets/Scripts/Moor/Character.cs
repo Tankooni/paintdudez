@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
 	[NonSerialized]
 	public myMoveVars characterValues;
 	
-    public void Awake()
+    public void Start()
     {
 		characterValues = new myMoveVars();
 		groundNormal = Vector3.zero;
@@ -42,6 +42,8 @@ public class Character : MonoBehaviour
 		myController = GetComponent<CharacterController>();
 		
 		gameObject.SendMessage("SetCharValues", characterValues);
+		
+		WorldGlobal.Narrator.player = this;
     }
 	public void OnControllerColliderHit (ControllerColliderHit hit)
 	{
