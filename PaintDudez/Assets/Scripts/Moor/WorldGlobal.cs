@@ -10,6 +10,7 @@ public class WorldGlobal : MonoBehaviour {
 	public static Dictionary<string, AudioClip> audioClips;
 	public static Dictionary<string, GameObject> Prefabs;
 	public static Dictionary<string, Material> Materials;
+	public static NarrationManager Narrator;
 	
 	void Awake () {
 		Init ();
@@ -43,5 +44,7 @@ public class WorldGlobal : MonoBehaviour {
 		Materials = new Dictionary<string, Material>();
 		Materials.Add("bubble", Resources.Load("Materials/SoapBubble") as Material);
 		Materials.Add("default", Resources.Load("Materials/lambert1") as Material);
+		
+		Narrator = new NarrationManager();
 	}
 }
