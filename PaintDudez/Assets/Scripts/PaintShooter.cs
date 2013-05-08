@@ -62,6 +62,7 @@ public class PaintShooter : MonoBehaviour
 		ammoType[2] = new PaintStruct(typeof(RedSplotch), Color.red, WorldGlobal.Materials["default"]);
 		ammoType[3] = new PaintStruct(typeof(GrowSplotch), WorldGlobal.currentColor, WorldGlobal.Materials["default"]);
 		ammoType[4] = new PaintStruct(typeof(GravityPaint), new Color(0.211f, 0, 0.16f), WorldGlobal.Materials["default"]);
+		ammoType[5] = new PaintStruct(typeof(BananaSplotch), Color.yellow, WorldGlobal.Materials["default"]);
 		
 		cleanAmmo = new PaintStruct(typeof(CleanSplotch), new Color(0,0,0,0), WorldGlobal.Materials["bubble"]);
 		
@@ -171,6 +172,11 @@ public class PaintShooter : MonoBehaviour
 		else if(Input.GetKeyDown (KeyCode.Alpha5))
 	    {
 				currentActivePaint = ammoType[4];
+				coreInstance.renderer.material.color = currentActivePaint.ballColor;
+	    }
+		else if(Input.GetKeyDown (KeyCode.Alpha6))
+	    {
+				currentActivePaint = ammoType[5];
 				coreInstance.renderer.material.color = currentActivePaint.ballColor;
 	    }
 

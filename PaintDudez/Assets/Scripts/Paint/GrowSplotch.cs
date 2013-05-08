@@ -11,7 +11,7 @@ public class GrowSplotch : PaintSplotch
 		: base(go)
 	{
 		go.renderer.material.color = Color.green;
-		myBlockHolder = MonoBehaviour.Instantiate(WorldGlobal.Prefabs["GrowthBlockv"], go.transform.position, go.transform.rotation) as GameObject;
+		myBlockHolder = MonoBehaviour.Instantiate(WorldGlobal.Prefabs["GrowthBlock"], go.transform.position, go.transform.rotation) as GameObject;
 		myBlock = myBlockHolder.transform.FindChild("Cube").gameObject;
 		myBlock.name = "GrowBlock";
 		myBlock.renderer.material.color = WorldGlobal.currentColor;
