@@ -4,26 +4,47 @@ using System;
 using System.Collections.Generic;
 using MainGameComponents;
 
-public class WorldGlobal : MonoBehaviour {
-
-	//Character myChar;
+public class WorldGlobal : MonoBehaviour
+{
 	public static Dictionary<string, AudioClip> audioClips;
 	public static Dictionary<string, GameObject> Prefabs;
 	public static Dictionary<string, Material> Materials;
+	public static Color currentColor;
+	Color newColor;
+	Color oldColor;
+	float percentage = 0;
 	
-	void Awake () {
+	void Awake()
+	{
 		Init ();
 		DontDestroyOnLoad(this);
+		newColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+		oldColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
 	}
 	
-	void Update () {
-		//myChar.Update();
+	void Update()
+	{
+		if(!(percentage >= 1))
+		{
+			percentage += .03f;
+			ChangeColor(ref WorldGlobal.currentColor, oldColor, newColor, percentage);
+		}
+		else
+		{
+			Debug.Log("NewColor");
+			oldColor = newColor;
+			newColor.r = UnityEngine.Random.value;
+			newColor.g = UnityEngine.Random.value;
+			newColor.b = UnityEngine.Random.value;
+			percentage = 0;
+		}
 	}
-	void OnLevelWasLoaded() {
+	void OnLevelWasLoaded()
+	{
 		Init ();
 	}
-	void Init() {
-		//myChar = new Character();
+	void Init()
+	{
 		audioClips = new Dictionary<string, AudioClip>();
 		audioClips.Add("splat", Resources.Load("Sounds/splat") as AudioClip);
 		audioClips.Add("shoot", Resources.Load("Sounds/shoot") as AudioClip);
@@ -43,5 +64,12 @@ public class WorldGlobal : MonoBehaviour {
 		Materials = new Dictionary<string, Material>();
 		Materials.Add("bubble", Resources.Load("Materials/SoapBubble") as Material);
 		Materials.Add("default", Resources.Load("Materials/lambert1") as Material);
+	}
+	
+	void ChangeColor(ref Color n, Color a, Color b, float perc)
+	{
+		n.r = Mathf.Lerp(a.r, b.r, perc);
+		n.b = Mathf.Lerp(a.b, b.b, perc);
+		n.g = Mathf.Lerp(a.g, b.g, perc);
 	}
 }
