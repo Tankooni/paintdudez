@@ -35,6 +35,11 @@ public class PaintSplotchScript : MonoBehaviour
 			paint.DeEnactPaint(col);
 	}
 	
+	void OnDrawGizmos()
+	{
+		Gizmos.DrawWireCube(collider.transform.position, collider.transform.localScale);
+	}
+	
 	// Update is called once per frame
 	void Update()
 	{

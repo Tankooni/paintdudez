@@ -16,11 +16,20 @@ public class WorldGlobal : MonoBehaviour
 	
 	void Awake()
 	{
+//		Do();
+//        print("This is printed immediately");
 		Init ();
 		DontDestroyOnLoad(this);
 		newColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
 		oldColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
 	}
+	
+//	IEnumerator Do()
+//	{
+//        print("Do now");
+//        yield return new WaitForSeconds(2);
+//        print("Do 2 seconds later");
+//    }
 	
 	void Update()
 	{
@@ -31,7 +40,6 @@ public class WorldGlobal : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("NewColor");
 			oldColor = newColor;
 			newColor.r = UnityEngine.Random.value;
 			newColor.g = UnityEngine.Random.value;
