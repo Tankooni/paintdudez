@@ -8,14 +8,23 @@ public class PaintSplotchScript : MonoBehaviour
 	MeshFilter mf;
 	Vector3 normal;
 	PaintSplotch paint = null;
+	GameObject myCollider;
+	GameObject myColScalar;
 	
 	// Use this for initialization
 	void Start()
 	{
 		mf = GetComponent<MeshFilter>();
+		myColScalar = transform.Find("Bananas").gameObject;
+		myCollider = myColScalar.transform.FindChild("Cooler").gameObject;
 		if(paint == null)
 			paint = new BlueSplotch(gameObject);
 		paint.normal = normal;
+		//myCollider.transform.localScale = gameObject.transform.localScale;
+		myColScalar.transform.localScale = new Vector3(1, .5f, 1);
+		myCollider.transform.localPosition = new Vector3(0,gameObject.transform.localScale.y/2,0);
+		
+//		myCollider.transform.localRotation = gameObject.transform.localRotation;
 	}
 	
 	void SetSplotch(Type t)
@@ -37,10 +46,9 @@ public class PaintSplotchScript : MonoBehaviour
 	
 	void OnDrawGizmos()
 	{
-		Gizmos.DrawWireCube(collider.transform.position, collider.transform.localScale);
+		//Gizmos.DrawWireCube(myCollider.transform.position, myCollider.transform.localScale);
 	}
 	
-	// Update is called once per frame
 	void Update()
 	{
 		if(paint != null)
