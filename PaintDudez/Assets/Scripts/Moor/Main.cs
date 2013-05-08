@@ -20,7 +20,7 @@ namespace MainGameComponents
 		public float hAccel;
 		public float hAccelDeg;
 		public float jForce;
-		public bool FirstPlayer = true;
+		public bool FirstPlayer;
 		
 		
         //Also Must Be Defined: (Maybe)
@@ -105,7 +105,6 @@ namespace MainGameComponents
 		}
         public void HandleUpdate()
         {
-
             HandleInput();
 			HandleCamera();
         }
