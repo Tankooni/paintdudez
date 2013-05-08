@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\NarrationManager.cs" />
      <Compile Include="Assets\Scripts\NarrationTrigger.cs" />
      <Compile Include="Assets\Scripts\NarrativeCore.cs" />
+     <Compile Include="Assets\Scripts\Paint\BananaSplotch.cs" />
      <Compile Include="Assets\Scripts\Paint\BlueSplotch.cs" />
      <Compile Include="Assets\Scripts\Paint\CleanSplotch.cs" />
      <Compile Include="Assets\Scripts\Paint\GravityPaint.cs" />
