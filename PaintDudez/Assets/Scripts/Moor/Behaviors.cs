@@ -238,7 +238,7 @@ namespace MainGameComponents
 			
 			dataValues.inAir = true;
 			//Debug.Log("RevMag: " + dataValues.Vel.magnitude);
-			//dataValues.PrevVel = Vector3.zero;
+			dataValues.PrevVel = Vector3.zero;
 		}
 	}
 }
