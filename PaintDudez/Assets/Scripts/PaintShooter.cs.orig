@@ -43,7 +43,7 @@ public class PaintShooter : MonoBehaviour
 	Transform paintSpawn = null;
 	GameObject coreObject = null;
 	public GameObject coreInstance = null;
-	GameObject painGun = null;
+	public GameObject painGun = null;
 	GameObject flashLight = null;
 	
 	PaintStruct currentActivePaint;
@@ -55,14 +55,15 @@ public class PaintShooter : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		WorldGlobal.Narrator.shootsNLadders = this;
 		//Blue paint
 		//ammoType.Add(new paintStruct(typeof(BlueSplotch), Color.blue));
 		ammoType[0] = new PaintStruct(typeof(BlueSplotch), Color.blue, WorldGlobal.Materials["default"]);
-		//ammoType[1] = new PaintStruct(typeof(GreenSplotch), Color.green, WorldGlobal.Materials["default"]);
-		//ammoType[2] = new PaintStruct(typeof(RedSplotch), Color.red, WorldGlobal.Materials["default"]);
-		//ammoType[3] = new PaintStruct(typeof(GrowSplotch), WorldGlobal.currentColor, WorldGlobal.Materials["default"]);
-		//ammoType[4] = new PaintStruct(typeof(GravityPaint), new Color(0.211f, 0, 0.16f), WorldGlobal.Materials["default"]);
-		//ammoType[5] = new PaintStruct(typeof(BananaSplotch), Color.yellow, WorldGlobal.Materials["default"]);
+		ammoType[1] = new PaintStruct(typeof(GreenSplotch), Color.green, WorldGlobal.Materials["default"]);
+		ammoType[2] = new PaintStruct(typeof(RedSplotch), Color.red, WorldGlobal.Materials["default"]);
+		ammoType[3] = new PaintStruct(typeof(GrowSplotch), WorldGlobal.currentColor, WorldGlobal.Materials["default"]);
+		ammoType[4] = new PaintStruct(typeof(GravityPaint), new Color(0.211f, 0, 0.16f), WorldGlobal.Materials["default"]);
+		ammoType[5] = new PaintStruct(typeof(BananaSplotch), Color.yellow, WorldGlobal.Materials["default"]);
 		
 		cleanAmmo = new PaintStruct(typeof(CleanSplotch), new Color(0,0,0,0), WorldGlobal.Materials["bubble"]);
 		
@@ -148,27 +149,18 @@ public class PaintShooter : MonoBehaviour
 		
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 	    {
-            if (ammoType[0] != null)
-            {
-                currentActivePaint = ammoType[0];
-                coreInstance.renderer.material.color = currentActivePaint.ballColor;
-            }
+			currentActivePaint = ammoType[0];
+			coreInstance.renderer.material.color = currentActivePaint.ballColor;
 	    }
 	    else if(Input.GetKeyDown(KeyCode.Alpha2))
 	    {
-            if (ammoType[1] != null)
-            {
-                currentActivePaint = ammoType[1];
-                coreInstance.renderer.material.color = currentActivePaint.ballColor;
-            }
+			currentActivePaint = ammoType[1];
+			coreInstance.renderer.material.color = currentActivePaint.ballColor;
 	    }
 	    else if(Input.GetKeyDown (KeyCode.Alpha3))
 	    {
-            if (ammoType[2] != null)
-            {
-                currentActivePaint = ammoType[2];
-                coreInstance.renderer.material.color = currentActivePaint.ballColor;
-            }
+			currentActivePaint = ammoType[2];
+			coreInstance.renderer.material.color = currentActivePaint.ballColor;
 	    }
 		else if(Input.GetKeyDown (KeyCode.Alpha4))
 	    {
@@ -180,19 +172,13 @@ public class PaintShooter : MonoBehaviour
 	    }
 		else if(Input.GetKeyDown (KeyCode.Alpha5))
 	    {
-            if (ammoType[4] != null)
-            {
-                currentActivePaint = ammoType[4];
-                coreInstance.renderer.material.color = currentActivePaint.ballColor;
-            }
+				currentActivePaint = ammoType[4];
+				coreInstance.renderer.material.color = currentActivePaint.ballColor;
 	    }
 		else if(Input.GetKeyDown (KeyCode.Alpha6))
 	    {
-            if (ammoType[5] != null)
-            {
-                currentActivePaint = ammoType[5];
-                coreInstance.renderer.material.color = currentActivePaint.ballColor;
-            }
+				currentActivePaint = ammoType[5];
+				coreInstance.renderer.material.color = currentActivePaint.ballColor;
 	    }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -239,6 +225,7 @@ public class PaintShooter : MonoBehaviour
     void toggleObject()
     {
         Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+		//Ray pickRay = new Ray(paintSpawn.position, paintSpawn.TransformDirection(Vector3.left));
         if (!pickObj)
         {
             if (Physics.Raycast(pickRay, out pickHit, 2.5f) && pickHit.transform.tag == "Pick")
@@ -256,19 +243,6 @@ public class PaintShooter : MonoBehaviour
         else
         {
             pickObj = null;
-        }
-    }
-
-    void addPaint(PaintStruct paintIN)
-    {
-        for (int x = 0; x <= ammoType.Length; x++)
-        {
-            if(ammoType[x] == null)
-            {
-                ammoType[x] = paintIN;
-                currentActivePaint = ammoType[x];
-                break;
-            }
         }
     }
 	

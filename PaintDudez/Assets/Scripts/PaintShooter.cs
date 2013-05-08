@@ -43,7 +43,7 @@ public class PaintShooter : MonoBehaviour
 	Transform paintSpawn = null;
 	GameObject coreObject = null;
 	public GameObject coreInstance = null;
-	GameObject painGun = null;
+	public GameObject painGun = null;
 	GameObject flashLight = null;
 	
 	PaintStruct currentActivePaint;
@@ -55,6 +55,7 @@ public class PaintShooter : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		WorldGlobal.Narrator.shootsNLadders = this;
 		//Blue paint
 		//ammoType.Add(new paintStruct(typeof(BlueSplotch), Color.blue));
 		ammoType[0] = new PaintStruct(typeof(BlueSplotch), Color.blue, WorldGlobal.Materials["default"]);
@@ -238,8 +239,8 @@ public class PaintShooter : MonoBehaviour
 
     void toggleObject()
     {
-        //Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		Ray pickRay = new Ray(paintSpawn.position, paintSpawn.TransformDirection(Vector3.left));
+        Ray pickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+		//Ray pickRay = new Ray(paintSpawn.position, paintSpawn.TransformDirection(Vector3.left));
         if (!pickObj)
         {
             if (Physics.Raycast(pickRay, out pickHit, 2.5f) && pickHit.transform.tag == "Pick")
