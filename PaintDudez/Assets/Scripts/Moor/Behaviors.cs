@@ -180,11 +180,11 @@ namespace MainGameComponents
 		{
 			dataValues.hForce = 15.0f;
 		}
-		public override void HandleInput ()
+		public override void HandleInput()
 		{
 			if(myChar.getBehv() == "hax")
 			{
-				if(!InputManager.GetKey ("Mod2"))
+				if(!InputManager.GetKey("Mod2"))
 					myChar.SetBehavior("walk");
 			}
 			base.HandleInput();
@@ -220,7 +220,6 @@ namespace MainGameComponents
 			//Debug.Log("RevMag: " + dataValues.PrevVel.magnitude);
 			if(dataValues.PrevVel.magnitude < 20)
 			{
-				//Debug.Log("1");
 				dataValues.Vel = norm * 20;
 			}
 			else
@@ -231,6 +230,13 @@ namespace MainGameComponents
 				// 0.99f is a cheatsy hack. It seems to stop the jump height from increasing and decreasing
 				dataValues.Vel = Vector3.Reflect(dataValues.PrevVel.normalized, norm.normalized) * (dataValues.PrevVel.magnitude + 0.981f);
 			}
+			
+			if(InputManager.GetKey("Behv1"))
+			{
+				dataValues.Vel += dataValues.jForce*myNormal/2;
+			}
+			
+			dataValues.inAir = true;
 			//Debug.Log("RevMag: " + dataValues.Vel.magnitude);
 			//dataValues.PrevVel = Vector3.zero;
 		}
