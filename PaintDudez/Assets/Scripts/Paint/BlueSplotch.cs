@@ -27,7 +27,7 @@ public class BlueSplotch : PaintSplotch
 		else if(theCollider.rigidbody)
 		{
 			base.DeEnactPaint(theCollider);
-			theCollider.rigidbody.AddForce(normal*500);
+			theCollider.rigidbody.velocity = Vector3.Reflect(theCollider.rigidbody.velocity, normal.normalized);
 			
 			//if (theCollider.rigidbody.mass
 			AudioSource.PlayClipAtPoint(WorldGlobal.audioClips["ballBounce"], theCollider.transform.position, 4.0f);

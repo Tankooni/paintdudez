@@ -38,7 +38,7 @@ public class PaintBlobScript : MonoBehaviour
 			{
 				//Debug.DrawRay(hit.point, hit.normal, Color.red, 1000);
 
-				GameObject decal = Instantiate(WorldGlobal.Prefabs["splatter"], hit.point + (contact.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, contact.normal)) as GameObject;
+				GameObject decal = Instantiate(WorldGlobal.Prefabs["splatterDecal"], hit.point + (contact.normal * 0.001f), Quaternion.FromToRotation(Vector3.up, contact.normal)) as GameObject;
 				//decal.transform.localScale = new Vector3(Random.Range(1.0f, 4.0f), decal.transform.localScale.y, Random.Range(1.0f, 4.0f));
 				decal.transform.localScale = new Vector3(2, decal.transform.localScale.y, 2);
 				//decal.transform.parent = contact.otherCollider.transform;
