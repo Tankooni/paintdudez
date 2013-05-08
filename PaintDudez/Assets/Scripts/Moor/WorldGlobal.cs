@@ -17,36 +17,13 @@ public class WorldGlobal : MonoBehaviour
 	
 	void Awake()
 	{
-//		Do();
-//        print("This is printed immediately");
 		Init ();
 		DontDestroyOnLoad(this);
-		newColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
-		oldColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
 	}
-	
-//	IEnumerator Do()
-//	{
-//        print("Do now");
-//        yield return new WaitForSeconds(2);
-//        print("Do 2 seconds later");
-//    }
 	
 	void Update()
 	{
-		if(!(percentage >= 1))
-		{
-			percentage += .03f;
-			ChangeColor(ref WorldGlobal.currentColor, oldColor, newColor, percentage);
-		}
-		else
-		{
-			oldColor = newColor;
-			newColor.r = UnityEngine.Random.value;
-			newColor.g = UnityEngine.Random.value;
-			newColor.b = UnityEngine.Random.value;
-			percentage = 0;
-		}
+		ChangeColor();
 	}
 	void OnLevelWasLoaded()
 	{
@@ -54,15 +31,26 @@ public class WorldGlobal : MonoBehaviour
 	}
 	void Init()
 	{
-		audioClips = new Dictionary<string, AudioClip>();
-		audioClips.Add("splat", Resources.Load("Sounds/splat") as AudioClip);
-		audioClips.Add("shoot", Resources.Load("Sounds/shoot") as AudioClip);
-		audioClips.Add("bounce", Resources.Load("Sounds/bounce") as AudioClip);
-		audioClips.Add("ballBounce", Resources.Load("Sounds/ballBounce") as AudioClip);
-		audioClips.Add("speedPaint", Resources.Load("Sounds/speedPaint") as AudioClip);
-		audioClips.Add("clean", Resources.Load("Sounds/erasePaint") as AudioClip);
-		audioClips.Add("grow", Resources.Load("Sounds/growPaint") as AudioClip);
+		newColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value, 0.9f);
+		oldColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value, 0.9f);
 		
+		audioClips = new Dictionary<string, AudioClip>();
+		UnityEngine.Object[] os = Resources.LoadAll("Sounds");
+		foreach(UnityEngine.Object o in  os)
+		{
+			audioClips.Add((o as AudioClip).name, o as AudioClip);
+			//Debug.Log(o);
+		}
+		
+		
+//		audioClips.Add("splat", Resources.Load("Sounds/splat") as AudioClip);
+//		audioClips.Add("shoot", Resources.Load("Sounds/shoot") as AudioClip);
+//		audioClips.Add("bounce", Resources.Load("Sounds/bounce") as AudioClip);
+//		audioClips.Add("ballBounce", Resources.Load("Sounds/ballBounce") as AudioClip);
+//		audioClips.Add("speedPaint", Resources.Load("Sounds/speedPaint") as AudioClip);
+//		audioClips.Add("clean", Resources.Load("Sounds/erasePaint") as AudioClip);
+//		audioClips.Add("grow", Resources.Load("Sounds/growPaint") as AudioClip);
+//		
 		Prefabs = new Dictionary<string, GameObject>();
 		Prefabs.Add("blob", Resources.Load("Prefabs/paintBlob") as GameObject);
 		Prefabs.Add("ball", Resources.Load("Prefabs/SphereZ") as GameObject);
@@ -76,10 +64,23 @@ public class WorldGlobal : MonoBehaviour
 		Narrator = new NarrationManager();
 	}
 
-	void ChangeColor(ref Color n, Color a, Color b, float perc)
+	void ChangeColor()
 	{
-		n.r = Mathf.Lerp(a.r, b.r, perc);
-		n.b = Mathf.Lerp(a.b, b.b, perc);
-		n.g = Mathf.Lerp(a.g, b.g, perc);
+		if(!(percentage >= 1))
+		{
+			percentage += .03f;
+		}
+		else
+		{
+			oldColor = newColor;
+			newColor.r = UnityEngine.Random.value;
+			newColor.g = UnityEngine.Random.value;
+			newColor.b = UnityEngine.Random.value;
+			percentage = 0;
+		}
+		
+		currentColor.r = Mathf.Lerp(oldColor.r, newColor.r, percentage);
+		currentColor.b = Mathf.Lerp(oldColor.b, newColor.b, percentage);
+		currentColor.g = Mathf.Lerp(oldColor.g, newColor.g, percentage);
 	}
 }
