@@ -126,7 +126,6 @@ public class Character : MonoBehaviour
 		{
 			characterValues.inAir = false;
 			characterValues.Vel.y = 0;
-			Debug.Log("SetLastPos");
 			lastGoodPos = transform.position;
 		}
 		if((myFlags & CollisionFlags.CollidedAbove) == (CollisionFlags.Above))
@@ -144,7 +143,6 @@ public class Character : MonoBehaviour
 	
 	public void killedZ()
 	{
-		Debug.Log("DEATHER");
 		characterValues.PrevVel = Vector3.zero;
 		characterValues.Vel = Vector3.zero;
 		transform.position = lastGoodPos;

@@ -12,7 +12,7 @@ public class NarrationTrigger : MonoBehaviour
 		if (NarrationAudioClip != "" && WorldGlobal.audioClips.ContainsKey(NarrationAudioClip))
 		{
 			//Debug.Log(WorldGlobal.audioClips[NarrationAudioClip]);
-			Debug.Log(WorldGlobal.Narrator.narrationClips);
+			//Debug.Log(WorldGlobal.Narrator.narrationClips);
 			WorldGlobal.Narrator.narrationClips.Add(name, WorldGlobal.audioClips[NarrationAudioClip]);
 		}
 		//StartCoroutine(Do ());

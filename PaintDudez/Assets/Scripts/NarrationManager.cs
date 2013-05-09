@@ -129,7 +129,12 @@ public class NarrationManager : MonoBehaviour
 			}
 			doneAudio = false;
 		}
-
+		
+		while(player.myBehvariorS != "BluePaint")
+		{
+			yield return new WaitForSeconds(0);
+		}
+		
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_ItsBouncy"]);
 		while(!doneAudio)
 		{
