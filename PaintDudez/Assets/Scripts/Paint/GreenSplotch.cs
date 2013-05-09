@@ -30,8 +30,11 @@ public class GreenSplotch : PaintSplotch
 		base.DeEnactPaint (theCollider);
 		if(theCollider.name != "CubePlayer" && theCollider.tag != "Paint" && theCollider.tag != "Bubble")
 		{
-			theCollider.rigidbody.isKinematic = false;
-			myHeldObjs.Remove(theCollider.gameObject);
+			if(myHeldObjs.Contains(theCollider.gameObject))
+			{
+				theCollider.rigidbody.isKinematic = false;
+				myHeldObjs.Remove(theCollider.gameObject);
+			}
 		}
 	}
 	

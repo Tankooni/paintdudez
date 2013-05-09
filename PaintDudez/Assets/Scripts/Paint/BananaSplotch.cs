@@ -26,7 +26,7 @@ public class BananaSplotch : PaintSplotch
 	
 	public override void Update()
 	{
-		if(BananaSplotch.BananaList.Count <= 100)
+		if(BananaSplotch.BananaList.Count <= 500)
 		{
 			GameObject b = GameObject.Instantiate(WorldGlobal.Prefabs["banana"], myObject.transform.position, Quaternion.identity) as GameObject;
 			b.rigidbody.AddForce(-normal * 10);
