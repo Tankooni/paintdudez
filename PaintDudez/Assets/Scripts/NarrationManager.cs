@@ -50,6 +50,7 @@ public class NarrationManager : MonoBehaviour
 	
 	IEnumerator AUDIOMONKEY()
 	{
+		Screen.lockCursor = true;
 		while(narrativeCore == null)
 		{
 			yield return new WaitForSeconds(0);
@@ -63,7 +64,7 @@ public class NarrationManager : MonoBehaviour
 		Debug.Log("Finished Black");
 		doneAudio = false;
 		setPlayerPosition("WhiteRoomSpawn"); 
-		
+
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
@@ -145,6 +146,13 @@ public class NarrationManager : MonoBehaviour
 		
 		setPlayerPosition("LevelSpawn");
 		
+		double monkeyTime = AudioSettings.dspTime;
+		GameObject.Find("Camera+Gun").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("Cube 1").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("Cube 2").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("Cube 3").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("Cube 4").audio.PlayScheduled(monkeyTime + 3);
+		
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_YourPlace"]);
 		while(!doneAudio)
 		{
@@ -152,7 +160,42 @@ public class NarrationManager : MonoBehaviour
 		}
 		doneAudio = false;
 		
+		//waiting for Red
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
+		doneAudio = false;
+		Debug.Log("Red Done");
 		
+		//waiting for Green
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
+		doneAudio = false;
+		Debug.Log("Green Done");
+		
+		//waiting for Growth
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
+		doneAudio = false;
+		Debug.Log("Growth Done");
+		
+		WorldGlobal.isReadyToFireGrowth = true;
+		while(!WorldGlobal.hasFiredGrowth)
+		{
+			yield return new WaitForSeconds(0);
+		}
+		
+		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GrowColor"]);
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
+		doneAudio = false;
 	}
 	
 	public void QueueSound(AudioClip audio)

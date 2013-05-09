@@ -15,7 +15,7 @@ public class KillZ : MonoBehaviour
 	
 	}
 	
-	void OnTriggerEnter(Collider col)
+	void OnTriggerExit(Collider col)
 	{
 		if(col.gameObject.name == "CubePlayer") // Only trigger for the player
 		{
