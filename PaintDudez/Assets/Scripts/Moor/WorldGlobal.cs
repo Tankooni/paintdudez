@@ -17,6 +17,8 @@ public class WorldGlobal : MonoBehaviour
 	float percentage = 0;
 	
 	public static bool isReadyToFire = false;
+	public static bool isReadyToFireGrowth = false;
+	public static bool hasFiredGrowth = false;
 	
 	void Awake()
 	{

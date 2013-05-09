@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NarrativeCore : MonoBehaviour
 {
 	public bool IsPlaying = false;
 	MeshRenderer NCMr;
+	public Queue<AudioClip> toPlay = new Queue<AudioClip>();
+	
 	void Start()
 	{
 		NCMr = GetComponent<MeshRenderer>();
@@ -25,7 +28,10 @@ public class NarrativeCore : MonoBehaviour
 	public bool PlaySound(AudioClip sound)
 	{
 		if(IsPlaying == true)
+		{
+			WorldGlobal.Narrator.QueueSound(sound);
 			return false;
+		}
 		IsPlaying = true;
 		audio.PlayOneShot(sound);
 		StartCoroutine(SoundBool(sound.length));
@@ -37,6 +43,7 @@ public class NarrativeCore : MonoBehaviour
 		if(IsPlaying == true)
 		{
 			IsPlaying = false;
+			WorldGlobal.Narrator.SendMessage("AudioDone");
 			audio.Stop();
 			
 		}
@@ -47,5 +54,6 @@ public class NarrativeCore : MonoBehaviour
 		yield return new WaitForSeconds(time);
 		WorldGlobal.Narrator.SendMessage("AudioDone");
 		IsPlaying = false;
+		StopCoroutine("SoundBool");
 	}
 }
