@@ -18,7 +18,6 @@ public class SwingScript : MonoBehaviour {
 	{
 		if (canMove)
 		{
-			Debug.Log(gameObject.transform.rotation);
 			var nextRotation = gameObject.transform.rotation.z + Mathf.Sin(Time.timeSinceLevelLoad * 3.0f) * rotationAmount;
 
 			gameObject.transform.Rotate(0, 0, nextRotation);

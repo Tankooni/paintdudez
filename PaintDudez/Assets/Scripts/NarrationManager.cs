@@ -26,6 +26,7 @@ public class NarrationManager : MonoBehaviour
 		spawns.Add("WhiteRoomSpawn", GameObject.Find("WhiteRoomSpawn"));
 		spawns.Add("LevelSpawn", GameObject.Find("LevelSpawn"));
 		
+		
 		StartCoroutine(AUDIOMONKEY());
 		//player.transform.position = spawns["BlackRoomSpawn"].transform.position;
 	}
@@ -57,149 +58,153 @@ public class NarrationManager : MonoBehaviour
 		}
 		NCMr = narrativeCore.GetComponent<MeshRenderer>();
 		narrativeCore.renderer.material.color = Color.grey;
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		Debug.Log("Finished Black");
 		doneAudio = false;
 		setPlayerPosition("WhiteRoomSpawn"); 
 
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		Debug.Log(shootsNLadders.painGun.transform.FindChild("b_gun_root/Sphere001"));
 		shootsNLadders.painGun.transform.FindChild("b_gun_root/Sphere001").gameObject.SetActive(true);
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GunBall"]);
 		
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GunBallBlue"]);
 		NCMr.enabled = true;
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		narrativeCore.renderer.material.color = Color.blue;
 		doneAudio = false;
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GunFire"]);
 		
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		
 		WorldGlobal.isReadyToFire = true;
 		
-//		while(!Input.GetMouseButtonDown(0))
-//        {
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!Input.GetMouseButtonDown(0))
+        {
+			yield return new WaitForSeconds(0);
+		}
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_StepOntoIt"]);
 		
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		
 		int count = 0;
-//		while(player.myBehvariorS != "BluePaint")
-//		{	
-//			count++;
-//			if(count >= 200)
-//			{
-//				Debug.Log("Bananas");
-//				break;
-//			}
-//			yield return new WaitForSeconds(0);
-//		}
-//		if(count >= 200)
-//		{
-//			narrativeCore.PlaySound(WorldGlobal.audioClips["n_SafeBouncy"]);
-//			while(!doneAudio)
-//			{
-//				yield return new WaitForSeconds(0);
-//			}
-//			doneAudio = false;
-//		}
+		while(player.myBehvariorS != "BluePaint")
+		{	
+			if(++count >= 200)
+			{
+				Debug.Log("Bananas");
+				break;
+			}
+			yield return new WaitForSeconds(0);
+		}
+		if(count >= 200)
+		{
+			narrativeCore.PlaySound(WorldGlobal.audioClips["n_SafeBouncy"]);
+			while(!doneAudio)
+			{
+				yield return new WaitForSeconds(0);
+			}
+			doneAudio = false;
+		}
 		
-//		while(player.myBehvariorS != "BluePaint")
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(player.myBehvariorS != "BluePaint")
+		{
+			yield return new WaitForSeconds(0);
+		}
 		
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_ItsBouncy"]);
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_SmallMap"]);
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		
 		setPlayerPosition("LevelSpawn");
 		
 		double monkeyTime = AudioSettings.dspTime;
 		GameObject.Find("Camera+Gun").audio.PlayScheduled(monkeyTime + 3);
-		GameObject.Find("Cube 1").audio.PlayScheduled(monkeyTime + 3);
-		GameObject.Find("Cube 2").audio.PlayScheduled(monkeyTime + 3);
-		GameObject.Find("Cube 3").audio.PlayScheduled(monkeyTime + 3);
-		GameObject.Find("Cube 4").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("MusicCubeDrums").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("MusicCubeDrums2").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("MusicCubeChimes").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("MusicCubeChimes2").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("MusicCubeBoops").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("MusicCubeBoops2").audio.PlayScheduled(monkeyTime + 3);
+		GameObject.Find("MusicCubeBubbles").audio.PlayScheduled(monkeyTime + 3);
 		
+		Debug.Log("time for your place!");
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_YourPlace"]);
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		Debug.Log("did your place!");
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		
 		//waiting for Red
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		Debug.Log("Red Done");
 		
 		//waiting for Green
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		Debug.Log("Green Done");
 		
 		//waiting for Growth
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 		Debug.Log("Growth Done");
 		
 		WorldGlobal.isReadyToFireGrowth = true;
-//		while(!WorldGlobal.hasFiredGrowth)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!WorldGlobal.hasFiredGrowth)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GrowColor"]);
-//		while(!doneAudio)
-//		{
-//			yield return new WaitForSeconds(0);
-//		}
+		while(!doneAudio)
+		{
+			yield return new WaitForSeconds(0);
+		}
 		doneAudio = false;
 	}
 	
