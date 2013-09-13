@@ -88,28 +88,7 @@ public class Character : MonoBehaviour
 	}
 	
     public void Update()
-    {		
-		//Debug.LogError("!: " + characterValues.Vel + " " + characterValues.gForce.y);
-		if(characterValues.Vel.y < 0 && Math.Abs(characterValues.Vel.y * Time.smoothDeltaTime) > 0)
-		{
-			RaycastHit hit;
-			//Debug.DrawRay(new Vector3(transform.position.x, transform.position.y - myController.height/2, transform.position.z), new Vector3(10, characterValues.Vel.y * Time.smoothDeltaTime), Color.red, 1000);
-			if(Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y - myController.height/2, transform.position.z), new Vector3(0,characterValues.Vel.y,0)), out hit, Math.Abs(characterValues.Vel.y * Time.smoothDeltaTime)))
-			{
-				if(hit.rigidbody) Debug.Log(hit.rigidbody.name);
-				else Debug.Log("Doesn't have a rigidbody");
-//				Debug.Log("X: " + (transform.position.x - hit.transform.position.x) + "Y: " + (transform.position.y - hit.transform.position.y));
-//				Vector3 temp = characterValues.Vel;
-//				temp.y -= hit.distance;
-//				characterValues.PrevVel = temp;
-				
-				
-			}
-//			else
-//				characterValues.PrevVel = Vector3.zero;
-		}
-		
-		
+    {	
 		characterValues.hAccel -= Time.smoothDeltaTime * 3;
 		characterValues.hAccel = Mathf.Clamp(characterValues.hAccel, 0.0f, characterValues.maxHAccel);
 		//Debug.Log(characterValues.hAccel + "    " + characterValues.maxHAccel);
@@ -128,11 +107,11 @@ public class Character : MonoBehaviour
 			characterValues.Vel.y = 0;
 			lastGoodPos = transform.position;
 		}
+		
 		if((myFlags & CollisionFlags.CollidedAbove) == (CollisionFlags.Above))
 		{
 			characterValues.Vel.y = 0;
 		}
-		//else if(myBehavior.dataValues.inAir) characterValues.Vel.y = 0;
 		//Debug.Log("In Air: " + characterValues.inAir);
     }
 	
