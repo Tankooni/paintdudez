@@ -25,6 +25,7 @@ public class NarrationManager : MonoBehaviour
 		spawns.Add("BlackRoomSpawn", GameObject.Find("BlackRoomSpawn"));
 		spawns.Add("WhiteRoomSpawn", GameObject.Find("WhiteRoomSpawn"));
 		spawns.Add("LevelSpawn", GameObject.Find("LevelSpawn"));
+		spawns.Add("TestSpawn", GameObject.Find("TestSpawn"));
 		
 		
 		StartCoroutine(AUDIOMONKEY());
@@ -51,27 +52,45 @@ public class NarrationManager : MonoBehaviour
 	
 	IEnumerator AUDIOMONKEY()
 	{
+		/*********
+		 * Setup *
+		 *********/
 		Screen.lockCursor = true;
+		
 		while(narrativeCore == null)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		NCMr = narrativeCore.GetComponent<MeshRenderer>();
 		narrativeCore.renderer.material.color = Color.grey;
+		
+		/**************
+		 * Black Room *
+		 **************/
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		Debug.Log("Finished Black");
 		doneAudio = false;
+		
+		/**************
+		 * White Room *
+		 **************/
 		setPlayerPosition("WhiteRoomSpawn"); 
 
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
-		Debug.Log(shootsNLadders.painGun.transform.FindChild("b_gun_root/Sphere001"));
+		
+		/****************
+		 * Imagine Ball *
+		 ****************/
 		shootsNLadders.painGun.transform.FindChild("b_gun_root/Sphere001").gameObject.SetActive(true);
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GunBall"]);
 		
@@ -79,78 +98,117 @@ public class NarrationManager : MonoBehaviour
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
+		
+		/************************
+		 * Imagine Ball is Blue *
+		 ************************/
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GunBallBlue"]);
 		NCMr.enabled = true;
+		
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		narrativeCore.renderer.material.color = Color.blue;
 		doneAudio = false;
+		
+		/******************
+		 * Imagine Firing *
+		 ******************/
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GunFire"]);
 		
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
 		
 		WorldGlobal.isReadyToFire = true;
 		
-		while(!Input.GetMouseButtonDown(0))
+		while(!Input.GetMouseButtonDown(0)) // Wait for fire
         {
 			yield return new WaitForSeconds(0);
 		}
+		
+		/****************
+		 * Step Onto It *
+		 ****************/
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_StepOntoIt"]);
 		
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
-		doneAudio = false;
 		
+		doneAudio = false;
 		int count = 0;
-		while(player.myBehvariorS != "BluePaint")
+		
+		while(player.myBehvariorS != "BluePaint") // Wait for player to step on blue paint
 		{	
-			if(++count >= 200)
+			if(++count >= 200) // If player takes too long, tell them it's safe
 			{
-				Debug.Log("Bananas");
 				break;
 			}
+			
 			yield return new WaitForSeconds(0);
 		}
+		
+		
+		/*************
+		 * It's Safe *
+		 *************/
 		if(count >= 200)
 		{
 			narrativeCore.PlaySound(WorldGlobal.audioClips["n_SafeBouncy"]);
+			
 			while(!doneAudio)
 			{
 				yield return new WaitForSeconds(0);
 			}
+			
 			doneAudio = false;
 		}
 		
-		while(player.myBehvariorS != "BluePaint")
+		while(player.myBehvariorS != "BluePaint") // Wait for player to step on blue paint
 		{
 			yield return new WaitForSeconds(0);
 		}
 		
+		
+		/***************
+		 * It's Bouncy *
+		 ***************/
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_ItsBouncy"]);
+		
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
 		
+		
+		/************************
+		 * Laid Out a Small Map *
+		 ************************/
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_SmallMap"]);
+		
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
-		
+			
+			// Spawn player
 		setPlayerPosition("LevelSpawn");
+		//setPlayerPosition("TestSpawn");
 		
+			// Start music cubes in sync
 		double monkeyTime = AudioSettings.dspTime;
 		GameObject.Find("Camera+Gun").audio.PlayScheduled(monkeyTime + 3);
 		GameObject.Find("MusicCubeDrums").audio.PlayScheduled(monkeyTime + 3);
@@ -161,50 +219,70 @@ public class NarrationManager : MonoBehaviour
 		GameObject.Find("MusicCubeBoops2").audio.PlayScheduled(monkeyTime + 3);
 		GameObject.Find("MusicCubeBubbles").audio.PlayScheduled(monkeyTime + 3);
 		
-		Debug.Log("time for your place!");
+		
+		/**************
+		 * Your Place *
+		 **************/
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_YourPlace"]);
-		Debug.Log("did your place!");
+		
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
 		
-		//waiting for Red
+		/**************************
+		 * Wait for Red Narration *
+		 **************************/
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
 		Debug.Log("Red Done");
 		
-		//waiting for Green
+		/****************************
+		 * Wait for Green Narration *
+		 ****************************/
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
 		Debug.Log("Green Done");
 		
-		//waiting for Growth
+		/*****************************
+		 * Wait for Growth Narration *
+		 *****************************/
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
 		Debug.Log("Growth Done");
 		
-		WorldGlobal.isReadyToFireGrowth = true;
-		while(!WorldGlobal.hasFiredGrowth)
+		WorldGlobal.isReadyToFireGrowth = true; // Allow player to fire growth paint
+		
+		while(!WorldGlobal.hasFiredGrowth) // Wait for player to fire growth paint
 		{
 			yield return new WaitForSeconds(0);
 		}
 		
+		
+		/*************************
+		 * Wow It's so Colorful! *
+		 *************************/
 		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GrowColor"]);
+		
 		while(!doneAudio)
 		{
 			yield return new WaitForSeconds(0);
 		}
+		
 		doneAudio = false;
 	}
 	

@@ -29,14 +29,15 @@ public class NarrativeCore : MonoBehaviour
 	{
 		if(IsPlaying == true)
 		{
-			Debug.Log("queueing");
+			Debug.Log("Narrator queueing " + sound.name);
 			WorldGlobal.Narrator.QueueSound(sound);
 			return false;
 		}
-			Debug.Log("playing");
+		
 		IsPlaying = true;
 		audio.PlayOneShot(sound);
 		StartCoroutine(SoundBool(sound.length));
+		
 		return true;
 	}
 	
