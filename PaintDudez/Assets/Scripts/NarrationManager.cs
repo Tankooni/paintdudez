@@ -254,36 +254,38 @@ public class NarrationManager : MonoBehaviour
 		doneAudio = false;
 		Debug.Log("Green Done");
 		
-		/*****************************
-		 * Wait for Growth Narration *
-		 *****************************/
-		while(!doneAudio)
-		{
-			yield return new WaitForSeconds(0);
-		}
-		
-		doneAudio = false;
-		Debug.Log("Growth Done");
-		
 		WorldGlobal.isReadyToFireGrowth = true; // Allow player to fire growth paint
 		
-		while(!WorldGlobal.hasFiredGrowth) // Wait for player to fire growth paint
-		{
-			yield return new WaitForSeconds(0);
-		}
-		
-		
-		/*************************
-		 * Wow It's so Colorful! *
-		 *************************/
-		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GrowColor"]);
-		
-		while(!doneAudio)
-		{
-			yield return new WaitForSeconds(0);
-		}
-		
-		doneAudio = false;
+//		/*****************************
+//		 * Wait for Growth Narration *
+//		 *****************************/
+//		while(!doneAudio)
+//		{
+//			yield return new WaitForSeconds(0);
+//		}
+//		
+//		doneAudio = false;
+//		Debug.Log("Growth Done");
+//		
+//		WorldGlobal.isReadyToFireGrowth = true; // Allow player to fire growth paint
+//		
+//		while(!WorldGlobal.hasFiredGrowth) // Wait for player to fire growth paint
+//		{
+//			yield return new WaitForSeconds(0);
+//		}
+//		
+//		
+//		/*************************
+//		 * Wow It's so Colorful! *
+//		 *************************/
+//		narrativeCore.PlaySound(WorldGlobal.audioClips["n_GrowColor"]);
+//		
+//		while(!doneAudio)
+//		{
+//			yield return new WaitForSeconds(0);
+//		}
+//		
+//		doneAudio = false;
 	}
 	
 	public void QueueSound(AudioClip audio)

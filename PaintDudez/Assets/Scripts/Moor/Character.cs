@@ -105,7 +105,12 @@ public class Character : MonoBehaviour
 		{
 			characterValues.inAir = false;
 			characterValues.Vel.y = 0;
-			if(transform.tag != "DoNot")
+			
+//			Ray dropRay = new Ray(transform.position - transform.TransformDirection(Vector3.down), transform.TransformDirection(Vector3.down));
+//			RaycastHit dropHit;
+//			Physics.Raycast(dropRay, out dropHit);
+//			Debug.Log(dropHit.transform.tag);
+//			if(dropHit.transform.tag == "Untagged")
 				lastGoodPos = transform.position;
 		}
 		
