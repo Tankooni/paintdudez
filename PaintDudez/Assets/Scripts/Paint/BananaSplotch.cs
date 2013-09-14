@@ -10,7 +10,7 @@ public class BananaSplotch : PaintSplotch
 	public BananaSplotch(GameObject go)
 		: base(go)
 	{
-		go.renderer.material.color = Color.yellow;
+		go.renderer.material.color = new Color(Random.value, Random.value, Random.value);
 		BananaSplotch.Splotches.Add(go);
 	}
 	
@@ -37,8 +37,5 @@ public class BananaSplotch : PaintSplotch
 			BananaSplotch.Splotches.Remove(myObject);
 			GameObject.Destroy(myObject);
 		}
-		
-		foreach(GameObject bo in BananaSplotch.BananaList)
-			bo.renderer.material.color = new Color(Random.value, Random.value, Random.value);
 	}
 }

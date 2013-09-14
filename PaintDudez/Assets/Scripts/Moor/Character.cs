@@ -105,7 +105,8 @@ public class Character : MonoBehaviour
 		{
 			characterValues.inAir = false;
 			characterValues.Vel.y = 0;
-			lastGoodPos = transform.position;
+			if(transform.tag != "DoNot")
+				lastGoodPos = transform.position;
 		}
 		
 		if((myFlags & CollisionFlags.CollidedAbove) == (CollisionFlags.Above))
